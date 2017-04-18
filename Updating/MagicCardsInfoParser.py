@@ -1,4 +1,4 @@
-import urllib2
+from urllib.request import urlopen
 import urllib
 import os
 import threading 
@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 from Base.Card import Card
 from Base.Set import Set
-from PyQt4 import QtCore
+
 
 ################################################################################
 class MagicCardsInfoParser:
@@ -57,7 +57,7 @@ class MagicCardsInfoParser:
     def _getSoup(self, url):
         """Returns a soup object from a given url"""
 
-        response = urllib2.urlopen(url.lower())
+        response = urlopen(url.lower())
         
         return BeautifulSoup(response.read())
 
@@ -77,24 +77,24 @@ class MagicCardsInfoParser:
             return setNames['Special'][mtgSetName]
         
 #-------------------------------------------------------------------------------
-    def _downloadImage(self, imageUrl, imageName, destFolder, 
-                       currentProgressBar=None):
+    def _downloadImage(self, imageUrl, imageName, destFolder, currentProgressBar=None):
         """Downloads an image from a given url."""
         
-        urllib.urlretrieve(imageUrl.lower(), destFolder + imageName)
+        urllib.request.urlretrieve(imageUrl.lower(), destFolder + imageName)
     
 #==========================================================================#
 #                              Public Methods                              #
 #==========================================================================#
 
 #-------------------------------------------------------------------------------
-    def checkConnection(self):
+    @staticmethod
+    def checkConnection():
         """
         Checks if magiccards.info is online.
         """
         
         try:
-            urllib2.urlopen('http://magiccards.info/')
+            urlopen('http://magiccards.info/')
         except:
             return False
         
@@ -196,8 +196,8 @@ class MagicCardsInfoParser:
         #------------------------------------
         #First we get the set name and code, which is located in the first
         #title tag of the first head tag
-        setName = unicode(soup.find('head').find('title').string)
-        setCode = unicode(self._setCodeFromSetName(setName))
+        setName = soup.find('head').find('title').string
+        setCode = self._setCodeFromSetName(setName)
         
         setNames = self.getMtgSetNames()
         
@@ -205,8 +205,6 @@ class MagicCardsInfoParser:
             isSpecial = True
         else:
             isSpecial = False
-        
-        print setName, isSpecial
         
         mtgSet = Set(setName, setCode, isSpecial) 
         
@@ -226,12 +224,12 @@ class MagicCardsInfoParser:
         for cardTag in cardTags:
             tdTags = cardTag.find_all('td')
             
-            collectorNum = unicode(tdTags[0].string)
-            cardName = unicode(tdTags[1].find('a').string)
-            cardId = unicode(setCode + collectorNum)
-            cardType = unicode(tdTags[2].string)
-            cardCost = unicode(tdTags[3].string)
-            cardRarity = unicode(tdTags[4].string)
+            collectorNum = tdTags[0].string
+            cardName = tdTags[1].find('a').string
+            cardId = setCode + collectorNum
+            cardType = tdTags[2].string
+            cardCost = tdTags[3].string
+            cardRarity = tdTags[4].string
             
             if not cardCost or cardCost == 'None':
                 cardCost = ''
@@ -306,8 +304,8 @@ class MagicCardsInfoParser:
         for cardTag in cardTags:
             tdTags = cardTag.find_all('td')
             
-            collectorNum = unicode(tdTags[0].string)
-            cardName = unicode(tdTags[1].find('a').string)
+            collectorNum = tdTags[0].string
+            cardName = tdTags[1].find('a').string
             
             if '(' in cardName and ')' in cardName:
                 cardName = cardName.split('(')[1].split(')')[0].replace('/','')
@@ -315,7 +313,7 @@ class MagicCardsInfoParser:
                 if 'b' in collectorNum:
                     continue
                 
-            seen.append(unicode(tdTags[1].find('a').string))
+            seen.append(tdTags[1].find('a').string)
             
             cardCount = cardNames.count(tdTags[1].find('a').string)
             cardCountSoFar = seen.count(tdTags[1].find('a').string)
@@ -333,17 +331,15 @@ class MagicCardsInfoParser:
             imageNames[imageName] = imageUrl
             
         count = 1
-        for (imageName, imageUrl) in imageNames.iteritems():
+        for (imageName, imageUrl) in imageNames.items():
             if currentProgressBar:
-                QtCore.QCoreApplication.processEvents()
                 text = 'Downloading image {cardName} ({current} out of {total})'
                 text = text.format(cardName=imageName, current=count, total=totalNum)
                 currentProgressText.setText(text)
                 currentProgressBar.setValue(count)
-                QtCore.QCoreApplication.processEvents()
                 
             target = self._downloadImage
-            args=(imageUrl, imageName, downloadFolder)
+            args = (imageUrl, imageName, downloadFolder)
             
             t = threading.Thread(target=target, args=args)
             t.daemon = True

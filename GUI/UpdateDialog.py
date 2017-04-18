@@ -1,32 +1,25 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'updatedialog.ui'
-#
-# Created: Sat Jul 20 08:47:27 2013
-#      by: PyQt4 UI code generator 4.9.6
-#
-# WARNING! All changes made in this file will be lost!
-
 from GUI.SetsTreeWidget import SetsTreeWidget
 from Updating.MagicCardsInfoParser import MagicCardsInfoParser
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = lambda s: s
 except AttributeError:
     def _fromUtf8(s):
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
+
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
-class UpdateDialog(QtGui.QDialog):
+
+class UpdateDialog(QtWidgets.QDialog):
     """
     Largely generated dialog to to update the program database and download images
     online.
@@ -82,7 +75,7 @@ class UpdateDialog(QtGui.QDialog):
         if not self._parser.checkConnection():
             title = "Error in connection"
             msg = "Magiccards.info is offline or cannot connect to internet"
-            QtGui.QMessageBox.warning(self, title, msg)
+            QtWidgets.QMessageBox.warning(self, title, msg)
             return
         
         onlineMtgSetNames = self._parser.getMtgSetNames()
@@ -122,7 +115,6 @@ class UpdateDialog(QtGui.QDialog):
         self.progressBar_2.setMaximum(total + int(round(0.1 * total)))
         
         for chosenItem in chosenItems:
-            QtCore.QCoreApplication.processEvents()
             currentProgressText = 'prossessing Set {current} out of {total}'
             currentProgressText = currentProgressText.format(current=current,
                                                             total=total)
@@ -132,14 +124,11 @@ class UpdateDialog(QtGui.QDialog):
             
             self.progressBar.setValue(current - 1)
             self.progressBar_2.setValue(current - 1)
-            
-            QtCore.QCoreApplication.processEvents()
+
             downloadedSets.append(self._parser.getMtgSet(str(chosenItem.text(0))))
-            QtCore.QCoreApplication.processEvents()
             
             current += 1
-        
-        QtCore.QCoreApplication.processEvents()
+
         currentProgressText = 'Updating Database'
         overallProgressText = 'Prossessing sets'
         self.label_7.setText(currentProgressText)
@@ -173,8 +162,6 @@ class UpdateDialog(QtGui.QDialog):
         self.progressBar_2.setMaximum(total)
         
         for chosenItem in chosenItems:
-            QtCore.QCoreApplication.processEvents()
-            
             setName = str(chosenItem.text(0))
             setCode = str(chosenItem.text(1))
             destFolder = str(self.textEdit.toPlainText())
@@ -210,7 +197,7 @@ class UpdateDialog(QtGui.QDialog):
         """
         
         caption = 'Choose a folder for downloading images'
-        folder = QtGui.QFileDialog().getExistingDirectory(self, caption)
+        folder = QtWidgets.QFileDialog().getExistingDirectory(self, caption)
         
         self.textEdit.setText(folder)
         
@@ -288,40 +275,40 @@ class UpdateDialog(QtGui.QDialog):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(719, 512)
-        self.gridLayout = QtGui.QGridLayout(Dialog)
+        self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setMargin(10)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.connectButton = QtGui.QPushButton(Dialog)
+        self.connectButton = QtWidgets.QPushButton(Dialog)
         self.connectButton.setObjectName(_fromUtf8("connectButton"))
         self.horizontalLayout.addWidget(self.connectButton)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.downloadImagesButton = QtGui.QPushButton(Dialog)
+        self.downloadImagesButton = QtWidgets.QPushButton(Dialog)
         self.downloadImagesButton.setEnabled(False)
         self.downloadImagesButton.setObjectName(_fromUtf8("downloadImagesButton"))
         self.horizontalLayout.addWidget(self.downloadImagesButton)
-        self.updateSetsButton = QtGui.QPushButton(Dialog)
+        self.updateSetsButton = QtWidgets.QPushButton(Dialog)
         self.updateSetsButton.setEnabled(False)
         self.updateSetsButton.setObjectName(_fromUtf8("updateSetsButton"))
         self.horizontalLayout.addWidget(self.updateSetsButton)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
-        self.doneButton = QtGui.QPushButton(Dialog)
+        self.doneButton = QtWidgets.QPushButton(Dialog)
         self.doneButton.setObjectName(_fromUtf8("doneButton"))
         self.horizontalLayout.addWidget(self.doneButton)
         self.gridLayout.addLayout(self.horizontalLayout, 3, 0, 1, 1)
-        self.line = QtGui.QFrame(Dialog)
-        self.line.setFrameShape(QtGui.QFrame.HLine)
-        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line = QtWidgets.QFrame(Dialog)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.gridLayout.addWidget(self.line, 2, 0, 1, 1)
-        self.horizontalLayout_4 = QtGui.QHBoxLayout()
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        self.groupBox = QtGui.QGroupBox(Dialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Minimum)
+        self.groupBox = QtWidgets.QGroupBox(Dialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
@@ -329,9 +316,9 @@ class UpdateDialog(QtGui.QDialog):
         self.groupBox.setMinimumSize(QtCore.QSize(250, 50))
         self.groupBox.setMaximumSize(QtCore.QSize(200, 3000))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
-        self.gridLayout_3 = QtGui.QGridLayout(self.groupBox)
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
-        self.comboBox = QtGui.QComboBox(self.groupBox)
+        self.comboBox = QtWidgets.QComboBox(self.groupBox)
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
         self.comboBox.addItem(_fromUtf8(""))
         self.comboBox.addItem(_fromUtf8(""))
@@ -347,87 +334,87 @@ class UpdateDialog(QtGui.QDialog):
         self.setsTreeWidget.headerItem().setText(0, _fromUtf8("1"))
         self.gridLayout_3.addWidget(self.setsTreeWidget, 1, 0, 1, 1)
         self.horizontalLayout_4.addWidget(self.groupBox)
-        self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.groupBox_2 = QtGui.QGroupBox(Dialog)
+        self.groupBox_2 = QtWidgets.QGroupBox(Dialog)
         self.groupBox_2.setMinimumSize(QtCore.QSize(0, 150))
         self.groupBox_2.setMaximumSize(QtCore.QSize(16777215, 200))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
-        self.gridLayout_4 = QtGui.QGridLayout(self.groupBox_2)
+        self.gridLayout_4 = QtWidgets.QGridLayout(self.groupBox_2)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
-        self.progressBar_2 = QtGui.QProgressBar(self.groupBox_2)
+        self.progressBar_2 = QtWidgets.QProgressBar(self.groupBox_2)
         self.progressBar_2.setProperty("value", 0)
         self.progressBar_2.setObjectName(_fromUtf8("progressBar_2"))
         self.gridLayout_4.addWidget(self.progressBar_2, 3, 1, 1, 1)
-        self.label_7 = QtGui.QLabel(self.groupBox_2)
+        self.label_7 = QtWidgets.QLabel(self.groupBox_2)
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
         self.label_7.setObjectName(_fromUtf8("label_7"))
         self.gridLayout_4.addWidget(self.label_7, 0, 1, 1, 1)
-        self.progressBar = QtGui.QProgressBar(self.groupBox_2)
+        self.progressBar = QtWidgets.QProgressBar(self.groupBox_2)
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.gridLayout_4.addWidget(self.progressBar, 1, 1, 1, 1)
-        self.label_8 = QtGui.QLabel(self.groupBox_2)
+        self.label_8 = QtWidgets.QLabel(self.groupBox_2)
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName(_fromUtf8("label_8"))
         self.gridLayout_4.addWidget(self.label_8, 2, 1, 1, 1)
-        self.label_9 = QtGui.QLabel(self.groupBox_2)
+        self.label_9 = QtWidgets.QLabel(self.groupBox_2)
         self.label_9.setObjectName(_fromUtf8("label_9"))
         self.gridLayout_4.addWidget(self.label_9, 1, 0, 1, 1)
-        self.label_10 = QtGui.QLabel(self.groupBox_2)
+        self.label_10 = QtWidgets.QLabel(self.groupBox_2)
         self.label_10.setObjectName(_fromUtf8("label_10"))
         self.gridLayout_4.addWidget(self.label_10, 3, 0, 1, 1)
         self.verticalLayout_2.addWidget(self.groupBox_2)
-        self.groupBox_3 = QtGui.QGroupBox(Dialog)
+        self.groupBox_3 = QtWidgets.QGroupBox(Dialog)
         self.groupBox_3.setMinimumSize(QtCore.QSize(0, 200))
         self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
-        self.gridLayout_2 = QtGui.QGridLayout(self.groupBox_3)
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox_3)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.radioButton_2 = QtGui.QRadioButton(self.groupBox_3)
+        self.radioButton_2 = QtWidgets.QRadioButton(self.groupBox_3)
         self.radioButton_2.setChecked(True)
         self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
         self.horizontalLayout_2.addWidget(self.radioButton_2)
-        self.radioButton = QtGui.QRadioButton(self.groupBox_3)
+        self.radioButton = QtWidgets.QRadioButton(self.groupBox_3)
         self.radioButton.setEnabled(False)
         self.radioButton.setObjectName(_fromUtf8("radioButton"))
         self.horizontalLayout_2.addWidget(self.radioButton)
         self.gridLayout_2.addLayout(self.horizontalLayout_2, 1, 1, 1, 1)
-        self.label_6 = QtGui.QLabel(self.groupBox_3)
+        self.label_6 = QtWidgets.QLabel(self.groupBox_3)
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.gridLayout_2.addWidget(self.label_6, 1, 0, 1, 1)
-        self.textEdit = QtGui.QTextEdit(self.groupBox_3)
+        self.textEdit = QtWidgets.QTextEdit(self.groupBox_3)
         self.textEdit.setMinimumSize(QtCore.QSize(0, 25))
         self.textEdit.setMaximumSize(QtCore.QSize(16777215, 25))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
         self.gridLayout_2.addWidget(self.textEdit, 0, 1, 1, 1)
-        self.label_5 = QtGui.QLabel(self.groupBox_3)
+        self.label_5 = QtWidgets.QLabel(self.groupBox_3)
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.gridLayout_2.addWidget(self.label_5, 0, 0, 1, 1)
-        self.toolButton = QtGui.QToolButton(self.groupBox_3)
+        self.toolButton = QtWidgets.QToolButton(self.groupBox_3)
         self.toolButton.setMinimumSize(QtCore.QSize(25, 25))
         self.toolButton.setObjectName(_fromUtf8("toolButton"))
         self.gridLayout_2.addWidget(self.toolButton, 0, 2, 1, 1)
         self.verticalLayout_2.addWidget(self.groupBox_3)
-        self.groupBox_4 = QtGui.QGroupBox(Dialog)
+        self.groupBox_4 = QtWidgets.QGroupBox(Dialog)
         self.groupBox_4.setMinimumSize(QtCore.QSize(300, 70))
         self.groupBox_4.setMaximumSize(QtCore.QSize(16777215, 60))
         self.groupBox_4.setObjectName(_fromUtf8("groupBox_4"))
-        self.formLayout_2 = QtGui.QFormLayout(self.groupBox_4)
+        self.formLayout_2 = QtWidgets.QFormLayout(self.groupBox_4)
         self.formLayout_2.setObjectName(_fromUtf8("formLayout_2"))
-        self.magiccardsLabel = QtGui.QLabel(self.groupBox_4)
+        self.magiccardsLabel = QtWidgets.QLabel(self.groupBox_4)
         self.magiccardsLabel.setObjectName(_fromUtf8("magiccardsLabel"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.LabelRole, self.magiccardsLabel)
-        self.magiccardsConnectionLabel = QtGui.QLabel(self.groupBox_4)
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.magiccardsLabel)
+        self.magiccardsConnectionLabel = QtWidgets.QLabel(self.groupBox_4)
         self.magiccardsConnectionLabel.setObjectName(_fromUtf8("magiccardsConnectionLabel"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.magiccardsConnectionLabel)
-        self.gathererLabel = QtGui.QLabel(self.groupBox_4)
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.magiccardsConnectionLabel)
+        self.gathererLabel = QtWidgets.QLabel(self.groupBox_4)
         self.gathererLabel.setObjectName(_fromUtf8("gathererLabel"))
-        self.formLayout_2.setWidget(1, QtGui.QFormLayout.LabelRole, self.gathererLabel)
-        self.gathererConnectionLabel = QtGui.QLabel(self.groupBox_4)
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.gathererLabel)
+        self.gathererConnectionLabel = QtWidgets.QLabel(self.groupBox_4)
         self.gathererConnectionLabel.setObjectName(_fromUtf8("gathererConnectionLabel"))
-        self.formLayout_2.setWidget(1, QtGui.QFormLayout.FieldRole, self.gathererConnectionLabel)
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.gathererConnectionLabel)
         self.verticalLayout_2.addWidget(self.groupBox_4)
         self.horizontalLayout_4.addLayout(self.verticalLayout_2)
         self.gridLayout.addLayout(self.horizontalLayout_4, 0, 0, 1, 1)

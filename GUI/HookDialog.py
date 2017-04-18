@@ -1,29 +1,21 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'HookDialog.ui'
-#
-# Created: Tue Mar 19 18:38:34 2013
-#      by: PyQt4 UI code generator 4.9.6
-#
-# WARNING! All changes made in this file will be lost!
-
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = lambda s: s
 except AttributeError:
     def _fromUtf8(s):
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
+    
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
-class Ui_HookDialog(QtGui.QDialog):
+class Ui_HookDialog(QtWidgets.QDialog):
     """
     Largely generated dialog to choose optional forum hooks when saving a 
     cube as a text file.
@@ -74,43 +66,43 @@ class Ui_HookDialog(QtGui.QDialog):
         HookDialog.setObjectName(_fromUtf8("HookDialog"))
         HookDialog.resize(453, 252)
         HookDialog.setModal(True)
-        self.gridLayout = QtGui.QGridLayout(HookDialog)
+        self.gridLayout = QtWidgets.QGridLayout(HookDialog)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.verticalLayout = QtGui.QVBoxLayout()
+        self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.formLayout_2 = QtGui.QFormLayout()
-        self.formLayout_2.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout_2.setObjectName(_fromUtf8("formLayout_2"))
-        self.spoilerBHook = QtGui.QLabel(HookDialog)
+        self.spoilerBHook = QtWidgets.QLabel(HookDialog)
         self.spoilerBHook.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.spoilerBHook.setFont(font)
         self.spoilerBHook.setObjectName(_fromUtf8("spoilerBHook"))
-        self.formLayout_2.setWidget(3, QtGui.QFormLayout.LabelRole, self.spoilerBHook)
-        self.spoilerFHook = QtGui.QLabel(HookDialog)
+        self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.spoilerBHook)
+        self.spoilerFHook = QtWidgets.QLabel(HookDialog)
         self.spoilerFHook.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.spoilerFHook.setFont(font)
         self.spoilerFHook.setObjectName(_fromUtf8("spoilerFHook"))
-        self.formLayout_2.setWidget(2, QtGui.QFormLayout.LabelRole, self.spoilerFHook)
-        self.autocardBHookLabel = QtGui.QLabel(HookDialog)
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.spoilerFHook)
+        self.autocardBHookLabel = QtWidgets.QLabel(HookDialog)
         self.autocardBHookLabel.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.autocardBHookLabel.setFont(font)
         self.autocardBHookLabel.setObjectName(_fromUtf8("autocardBHookLabel"))
-        self.formLayout_2.setWidget(1, QtGui.QFormLayout.LabelRole, self.autocardBHookLabel)
-        self.autocardFHookLabel = QtGui.QLabel(HookDialog)
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.autocardBHookLabel)
+        self.autocardFHookLabel = QtWidgets.QLabel(HookDialog)
         self.autocardFHookLabel.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.autocardFHookLabel.setFont(font)
         self.autocardFHookLabel.setObjectName(_fromUtf8("autocardFHookLabel"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.LabelRole, self.autocardFHookLabel)
-        self.autocardFHookTextEdit = QtGui.QLineEdit(HookDialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.autocardFHookLabel)
+        self.autocardFHookTextEdit = QtWidgets.QLineEdit(HookDialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.autocardFHookTextEdit.sizePolicy().hasHeightForWidth())
@@ -122,9 +114,9 @@ class Ui_HookDialog(QtGui.QDialog):
         font.setWeight(75)
         self.autocardFHookTextEdit.setFont(font)
         self.autocardFHookTextEdit.setObjectName(_fromUtf8("autocardFHookTextEdit"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.autocardFHookTextEdit)
-        self.autocardBHookTextEdit = QtGui.QLineEdit(HookDialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.autocardFHookTextEdit)
+        self.autocardBHookTextEdit = QtWidgets.QLineEdit(HookDialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.autocardBHookTextEdit.sizePolicy().hasHeightForWidth())
@@ -136,9 +128,9 @@ class Ui_HookDialog(QtGui.QDialog):
         font.setWeight(75)
         self.autocardBHookTextEdit.setFont(font)
         self.autocardBHookTextEdit.setObjectName(_fromUtf8("autocardBHookTextEdit"))
-        self.formLayout_2.setWidget(1, QtGui.QFormLayout.FieldRole, self.autocardBHookTextEdit)
-        self.spoilerFHookTextEdit = QtGui.QLineEdit(HookDialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.autocardBHookTextEdit)
+        self.spoilerFHookTextEdit = QtWidgets.QLineEdit(HookDialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.spoilerFHookTextEdit.sizePolicy().hasHeightForWidth())
@@ -150,9 +142,9 @@ class Ui_HookDialog(QtGui.QDialog):
         font.setWeight(75)
         self.spoilerFHookTextEdit.setFont(font)
         self.spoilerFHookTextEdit.setObjectName(_fromUtf8("spoilerFHookTextEdit"))
-        self.formLayout_2.setWidget(2, QtGui.QFormLayout.FieldRole, self.spoilerFHookTextEdit)
-        self.spoilerBHookTextEdit = QtGui.QLineEdit(HookDialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.spoilerFHookTextEdit)
+        self.spoilerBHookTextEdit = QtWidgets.QLineEdit(HookDialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.spoilerBHookTextEdit.sizePolicy().hasHeightForWidth())
@@ -164,28 +156,28 @@ class Ui_HookDialog(QtGui.QDialog):
         font.setWeight(75)
         self.spoilerBHookTextEdit.setFont(font)
         self.spoilerBHookTextEdit.setObjectName(_fromUtf8("spoilerBHookTextEdit"))
-        self.formLayout_2.setWidget(3, QtGui.QFormLayout.FieldRole, self.spoilerBHookTextEdit)
+        self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.spoilerBHookTextEdit)
         self.verticalLayout.addLayout(self.formLayout_2)
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
-        self.line_2 = QtGui.QFrame(HookDialog)
-        self.line_2.setFrameShape(QtGui.QFrame.HLine)
-        self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line_2 = QtWidgets.QFrame(HookDialog)
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName(_fromUtf8("line_2"))
         self.verticalLayout.addWidget(self.line_2)
-        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
-        self.okButton = QtGui.QPushButton(HookDialog)
+        self.okButton = QtWidgets.QPushButton(HookDialog)
         self.okButton.setObjectName(_fromUtf8("okButton"))
         self.horizontalLayout.addWidget(self.okButton)
-        self.cancelButton = QtGui.QPushButton(HookDialog)
+        self.cancelButton = QtWidgets.QPushButton(HookDialog)
         self.cancelButton.setObjectName(_fromUtf8("cancelButton"))
         self.horizontalLayout.addWidget(self.cancelButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.gridLayout.addLayout(self.verticalLayout, 2, 0, 1, 1)
-        self.label_5 = QtGui.QLabel(HookDialog)
+        self.label_5 = QtWidgets.QLabel(HookDialog)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -194,9 +186,9 @@ class Ui_HookDialog(QtGui.QDialog):
         self.label_5.setWordWrap(True)
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.gridLayout.addWidget(self.label_5, 0, 0, 1, 1)
-        self.line = QtGui.QFrame(HookDialog)
-        self.line.setFrameShape(QtGui.QFrame.HLine)
-        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line = QtWidgets.QFrame(HookDialog)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.gridLayout.addWidget(self.line, 1, 0, 1, 1)
 

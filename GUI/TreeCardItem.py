@@ -1,9 +1,10 @@
 """"""
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 from Base.Card import Card
 
+
 ################################################################################
-class TreeCardItem(Card, QtGui.QTreeWidgetItem):
+class TreeCardItem(Card, QtWidgets.QTreeWidgetItem):
     """
     An object which is both a Card and a treewidgetitem. It automatically
     sets an image of the card's set as it's icon and it's name as the text.
@@ -16,9 +17,9 @@ class TreeCardItem(Card, QtGui.QTreeWidgetItem):
         
         Card.__init__(self, card.id, card.name, card.mtgSetName, card.rarity, 
                       card.cost, card.type)
-        QtGui.QTreeWidgetItem.__init__(self, card.name)
+        QtWidgets.QTreeWidgetItem.__init__(self, card.name)
 
-        self.setText(0,unicode( card.name))
+        self.setText(0, card.name)
         
         self.setData(1, 1, manaSymbols)
         self.setText(1, '')

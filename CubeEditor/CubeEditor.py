@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-import cPickle as pickle
+import pickle
 import codecs
 import os.path
-import ConfigParser
+import configparser
 
 from GUI.FilterButton import FilterButton, MultiColorFilterButton
 from GUI.CardImageWidget import CardImageWidget
@@ -20,12 +20,12 @@ from Base.Cube import Cube
 from GUI.CubeList import CubeList
 
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = lambda s: s
 except AttributeError:
     _fromUtf8 = lambda s: s
 
 
-class Ui_CubeEditor(QtGui.QMainWindow):
+class Ui_CubeEditor(QtWidgets.QMainWindow):
     """
     A cube editor window. Its quite similar to the mainwindow.
     """
@@ -34,7 +34,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         super(Ui_CubeEditor, self).__init__()
         #------------------------------------
         
-        self._config = ConfigParser.ConfigParser()
+        self._config = configparser.ConfigParser()
         self._cardReader = FileHandler(self.getDatabase())
         
         #------------------------------------
@@ -121,7 +121,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.cubeList.cardCount():
             reply = self._saveCubeNewWarning()
             
-            if reply == QtGui.QMessageBox.Yes:
+            if reply == QtWidgets.QMessageBox.Yes:
                 self.saveCubeAs()
         
         path = self._newCubeDialog()
@@ -295,10 +295,10 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         and (self.cubeList.cardCount()):
             reply = self._saveCubeClosingWarning()
         
-            if reply == QtGui.QMessageBox.Yes:
+            if reply == QtWidgets.QMessageBox.Yes:
                 self.saveCubeAs()
                 event.accept()
-            elif reply == QtGui.QMessageBox.Cancel:
+            elif reply == QtWidgets.QMessageBox.Cancel:
                 event.ignore()
             else:
                 event.accept()
@@ -316,7 +316,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         title = "No cards in the cube"
         msg = "Cannot save an empty cube"
-        QtGui.QMessageBox.warning(self, title, msg)
+        QtWidgets.QMessageBox.warning(self, title, msg)
 
 #-------------------------------------------------------------------------------
     def _saveCubeClosingWarning(self):
@@ -324,10 +324,10 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         title = "Save cube"
         msg = "Save cube before closing?"
-        return QtGui.QMessageBox.question(self, title, msg,
-                                          QtGui.QMessageBox.Yes, 
-                                          QtGui.QMessageBox.No,  
-                                          QtGui.QMessageBox.Cancel)
+        return QtWidgets.QMessageBox.question(self, title, msg,
+                                              QtWidgets.QMessageBox.Yes,
+                                              QtWidgets.QMessageBox.No,
+                                              QtWidgets.QMessageBox.Cancel)
 
 #-------------------------------------------------------------------------------
     def _saveCubeNewWarning(self):
@@ -338,10 +338,10 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         title = "Save cube"
         msg = "Save cube before creating a new one?"
-        return QtGui.QMessageBox.question(self, title, msg,
-                                          QtGui.QMessageBox.Yes, 
-                                          QtGui.QMessageBox.No,  
-                                          QtGui.QMessageBox.Cancel)
+        return QtWidgets.QMessageBox.question(self, title, msg,
+                                              QtWidgets.QMessageBox.Yes,
+                                              QtWidgets.QMessageBox.No,
+                                              QtWidgets.QMessageBox.Cancel)
         
 
 #-------------------------------------------------------------------------------
@@ -352,9 +352,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         fileFilter = '.Cube' 
         loc = self.getSetting('lastSaveCubeLoc')
         
-        return QtGui.QFileDialog().getSaveFileName(self, caption, 
-                                                   filter=fileFilter,
-                                                   directory=loc)
+        return QtWidgets.QFileDialog().getSaveFileName(self, caption, filter=fileFilter, directory=loc)
 
 #-------------------------------------------------------------------------------
     def _newCubeDialog(self):
@@ -364,9 +362,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         fileFilter = '.Cube' 
         loc = self.getSetting('lastSaveCubeLoc')
         
-        return QtGui.QFileDialog().getSaveFileName(self, caption, 
-                                                   filter=fileFilter,
-                                                   directory=loc)
+        return QtWidgets.QFileDialog().getSaveFileName(self, caption, filter=fileFilter, directory=loc)
 
 #-------------------------------------------------------------------------------
     def _saveOrganizedCubeTxtFile(self):
@@ -376,9 +372,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         fileFilter = '.txt' 
         loc = self.getSetting('lastSaveDeckLoc')
         
-        return QtGui.QFileDialog().getSaveFileName(self, caption, 
-                                                   filter=fileFilter,
-                                                   directory=loc)
+        return QtWidgets.QFileDialog().getSaveFileName(self, caption, filter=fileFilter, directory=loc)
     
 #-------------------------------------------------------------------------------
     def _openCubeFileDialog(self):
@@ -386,8 +380,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         caption = 'Open a .cube file'
         loc = self.getSetting('lastOpenCubeLoc')
-        return QtGui.QFileDialog.getOpenFileName(parent=None, caption=caption,
-                                                 directory=loc)
+        return QtWidgets.QFileDialog.getOpenFileName(parent=None, caption=caption, directory=loc)
 
 #-------------------------------------------------------------------------------
     def _openTxtFileDialog(self):
@@ -395,8 +388,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         caption = 'Open a text file containing a list of cards'
         loc = self.getSetting('lastOpenTxtFileLoc')
-        return QtGui.QFileDialog.getOpenFileName(parent=None, caption=caption,
-                                                 directory=loc)
+        return QtWidgets.QFileDialog.getOpenFileName(parent=None, caption=caption, directory=loc)
     
 #-------------------------------------------------------------------------------
     def _MWSfileOpenErrorDialog(self):
@@ -407,7 +399,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         title = "Error in opening a MWSDeck file"
         msg = "Specified file contains no card data or is corrupted"
-        QtGui.QMessageBox.warning(self, title, msg)
+        QtWidgets.QMessageBox.warning(self, title, msg)
 
 #-------------------------------------------------------------------------------
     def _txtFileOpenErrorDialog(self):
@@ -418,7 +410,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         title = "Error in opening a text file"
         msg = "Specified file contains no card data or is corrupted"
-        QtGui.QMessageBox.warning(self, title, msg)
+        QtWidgets.QMessageBox.warning(self, title, msg)
         
 #-------------------------------------------------------------------------------
     def _cubeFileOpenErrorDialog(self):
@@ -429,7 +421,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         
         title = "Error in opening a Cube file"
         msg = "Specified file contains no cube data or is corrupted"
-        QtGui.QMessageBox.warning(self, title, msg)
+        QtWidgets.QMessageBox.warning(self, title, msg)
 
 #-------------------------------------------------------------------------------
     def _errorsInTxtFileDialog(self, cards):
@@ -441,11 +433,11 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         title = 'Errors in the file'
         msg = "Some lines were rejected possibly because they had spelling errors, comments or other non-card text. You can manually fix these lines in the text file"
                     
-        msgBox = QtGui.QMessageBox()
+        msgBox = QtWidgets.QMessageBox()
         msgBox.setText(title)
         msgBox.setInformativeText(msg)
-        msgBox.setStandardButtons(QtGui.QMessageBox.Ok)
-        msgBox.setDefaultButton(QtGui.QMessageBox.Ok)
+        msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msgBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
         msgBox.setDetailedText(cards[1])
         msgBox.exec_()
         
@@ -457,50 +449,50 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1156, 915)
         MainWindow.setMinimumSize(QtCore.QSize(100, 100))
-        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.gridLayout = QtGui.QGridLayout(self.centralwidget)
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         
-        spacerItem = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem, 5, 2, 1, 1)
-        spacerItem1 = QtGui.QSpacerItem(20, 500, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 500, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem1, 6, 2, 1, 1)
-        self.sideBoardBox = QtGui.QGroupBox(self.centralwidget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        self.sideBoardBox = QtWidgets.QGroupBox(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sideBoardBox.sizePolicy().hasHeightForWidth())
         self.sideBoardBox.setSizePolicy(sizePolicy)
         self.sideBoardBox.setMinimumSize(QtCore.QSize(200, 300))
         self.sideBoardBox.setObjectName(_fromUtf8("sideBoardBox"))
-        self.gridLayout_2 = QtGui.QGridLayout(self.sideBoardBox)
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.sideBoardBox)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.masterBaseList = CubeList(self.sideBoardBox, self)
         self.masterBaseList.setObjectName(_fromUtf8("masterBaseList"))
         self.masterBaseList.headerItem().setText(0, _fromUtf8("1"))
         self.gridLayout_2.addWidget(self.masterBaseList, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.sideBoardBox, 1, 0, 6, 1)
-        self.deckBox = QtGui.QGroupBox(self.centralwidget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.MinimumExpanding)
+        self.deckBox = QtWidgets.QGroupBox(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.deckBox.sizePolicy().hasHeightForWidth())
         self.deckBox.setSizePolicy(sizePolicy)
         self.deckBox.setMinimumSize(QtCore.QSize(200, 300))
         self.deckBox.setObjectName(_fromUtf8("deckBox"))
-        self.gridLayout_3 = QtGui.QGridLayout(self.deckBox)
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.deckBox)
         self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
         self.cubeList = CubeList(self.deckBox, self)
         self.cubeList.setObjectName(_fromUtf8("cubeList"))
         self.cubeList.headerItem().setText(0, _fromUtf8("1"))
         self.gridLayout_3.addWidget(self.cubeList, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.deckBox, 1, 1, 6, 1)
-        self.statsBox = QtGui.QGroupBox(self.centralwidget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        self.statsBox = QtWidgets.QGroupBox(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.statsBox.sizePolicy().hasHeightForWidth())
@@ -508,13 +500,13 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.statsBox.setMinimumSize(QtCore.QSize(800, 200))
         self.statsBox.setMaximumSize(QtCore.QSize(800, 200))
         self.statsBox.setObjectName(_fromUtf8("statsBox"))
-        self.gridLayout_4 = QtGui.QGridLayout(self.statsBox)
-        self.gridLayout_4.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
+        self.gridLayout_4 = QtWidgets.QGridLayout(self.statsBox)
+        self.gridLayout_4.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.gridLayout_4.setMargin(5)
         self.gridLayout_4.setSpacing(0)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
         self.statsWidget = QuickStatsCanvas(self.statsBox)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.statsWidget.sizePolicy().hasHeightForWidth())
@@ -522,8 +514,8 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.statsWidget.setObjectName(_fromUtf8("statsWidget"))
         self.gridLayout_4.addWidget(self.statsWidget, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.statsBox, 0, 0, 1, 2)
-        self.cardImageBox = QtGui.QGroupBox(self.centralwidget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.cardImageBox = QtWidgets.QGroupBox(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.cardImageBox.sizePolicy().hasHeightForWidth())
@@ -532,22 +524,22 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.cardImageBox.setMaximumSize(QtCore.QSize(308, 436))
         self.cardImageBox.setBaseSize(QtCore.QSize(200, 200))
         self.cardImageBox.setObjectName(_fromUtf8("cardImageBox"))
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.cardImageBox)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.cardImageBox)
         self.verticalLayout_2.setSpacing(5)
-        self.verticalLayout_2.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
+        self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.verticalLayout_2.setMargin(5)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.cardImageWidget = CardImageWidget(self.cardImageBox, self.getSetting('picsFolder'), self.getDatabase().getMtgSetNames())
         self.cardImageWidget.setMaximumSize(QtCore.QSize(1000, 16777215))
         self.cardImageWidget.setObjectName(_fromUtf8("cardImageWidget"))
         self.verticalLayout_2.addWidget(self.cardImageWidget)
-        self.label = QtGui.QLabel(self.cardImageBox)
+        self.label = QtWidgets.QLabel(self.cardImageBox)
         self.label.setText(_fromUtf8(""))
         self.label.setObjectName(_fromUtf8("label"))
         self.verticalLayout_2.addWidget(self.label)
         self.gridLayout.addWidget(self.cardImageBox, 0, 2, 2, 1)
-        self.cardInfoBox = QtGui.QGroupBox(self.centralwidget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
+        self.cardInfoBox = QtWidgets.QGroupBox(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(10)
         sizePolicy.setVerticalStretch(10)
         sizePolicy.setHeightForWidth(self.cardInfoBox.sizePolicy().hasHeightForWidth())
@@ -555,8 +547,8 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.cardInfoBox.setMinimumSize(QtCore.QSize(218, 200))
         self.cardInfoBox.setMaximumSize(QtCore.QSize(208, 16777215))
         self.cardInfoBox.setObjectName(_fromUtf8("cardInfoBox"))
-        self.gridLayout_5 = QtGui.QGridLayout(self.cardInfoBox)
-        self.gridLayout_5.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
+        self.gridLayout_5 = QtWidgets.QGridLayout(self.cardInfoBox)
+        self.gridLayout_5.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.gridLayout_5.setSpacing(0)
         self.gridLayout_5.setContentsMargins(0, 0, -1, 0)
         self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
@@ -578,7 +570,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.multicolorButton = MultiColorFilterButton(self.cardInfoBox, self, self.masterBaseList, self.cubeList)
         self.multicolorButton.setObjectName(_fromUtf8("multicolorButton"))
         self.gridLayout_5.addWidget(self.multicolorButton, 3, 2, 1, 1)
-        spacerItem2 = QtGui.QSpacerItem(20, 10, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout_5.addItem(spacerItem2, 5, 1, 1, 1)
         self.whiteButton = FilterButton(self.cardInfoBox, self, 'W', self.masterBaseList, self.cubeList)
         self.whiteButton.setObjectName(_fromUtf8("whiteButton"))
@@ -590,17 +582,17 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.resetFiltersButton.setFlat(False)
         self.resetFiltersButton.setObjectName(_fromUtf8("resetFiltersButton"))
         self.gridLayout_5.addWidget(self.resetFiltersButton, 11, 0, 1, 3)
-        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setContentsMargins(6, -1, 0, -1)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.sideaboardRadioButton = QtGui.QRadioButton(self.cardInfoBox)
+        self.sideaboardRadioButton = QtWidgets.QRadioButton(self.cardInfoBox)
         self.sideaboardRadioButton.setChecked(True)
         self.sideaboardRadioButton.setObjectName(_fromUtf8("sideaboardRadioButton"))
         self.horizontalLayout.addWidget(self.sideaboardRadioButton)
-        self.deckRadioButton = QtGui.QRadioButton(self.cardInfoBox)
+        self.deckRadioButton = QtWidgets.QRadioButton(self.cardInfoBox)
         self.deckRadioButton.setObjectName(_fromUtf8("deckRadioButton"))
         self.horizontalLayout.addWidget(self.deckRadioButton)
-        self.bothRadioButton = QtGui.QRadioButton(self.cardInfoBox)
+        self.bothRadioButton = QtWidgets.QRadioButton(self.cardInfoBox)
         self.bothRadioButton.setObjectName(_fromUtf8("bothRadioButton"))
         self.horizontalLayout.addWidget(self.bothRadioButton)
         self.gridLayout_5.addLayout(self.horizontalLayout, 0, 0, 1, 3)
@@ -608,7 +600,7 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.creatureButton.setCheckable(True)
         self.creatureButton.setObjectName(_fromUtf8("creatureButton"))
         self.gridLayout_5.addWidget(self.creatureButton, 6, 2, 1, 1)
-        spacerItem3 = QtGui.QSpacerItem(20, 10, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout_5.addItem(spacerItem3, 8, 1, 1, 1)
         self.artifactButton = FilterButton(self.cardInfoBox, self, 'Artifact', self.masterBaseList, self.cubeList)
         self.artifactButton.setCheckable(True)
@@ -634,24 +626,24 @@ class Ui_CubeEditor(QtGui.QMainWindow):
         self.deckBox.setStyleSheet(style)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
-        self.sideBoardBox.setTitle(QtGui.QApplication.translate("MainWindow", "Sideboard(0)", None, QtGui.QApplication.UnicodeUTF8))
-        self.deckBox.setTitle(QtGui.QApplication.translate("MainWindow", "Deck(0)", None, QtGui.QApplication.UnicodeUTF8))
-        self.statsBox.setTitle(QtGui.QApplication.translate("MainWindow", "Quick deck statistics", None, QtGui.QApplication.UnicodeUTF8))
-        self.cardImageBox.setTitle(QtGui.QApplication.translate("MainWindow", "Card Image", None, QtGui.QApplication.UnicodeUTF8))
-        self.cardInfoBox.setTitle(QtGui.QApplication.translate("MainWindow", "Filters", None, QtGui.QApplication.UnicodeUTF8))
-        self.landButton.setText(QtGui.QApplication.translate("MainWindow", "Land", None, QtGui.QApplication.UnicodeUTF8))
-        self.blackButton.setText(QtGui.QApplication.translate("MainWindow", "Black", None, QtGui.QApplication.UnicodeUTF8))
-        self.greenButton.setText(QtGui.QApplication.translate("MainWindow", "Green", None, QtGui.QApplication.UnicodeUTF8))
-        self.blueButton.setText(QtGui.QApplication.translate("MainWindow", "Blue", None, QtGui.QApplication.UnicodeUTF8))
-        self.redButton.setText(QtGui.QApplication.translate("MainWindow", "Red", None, QtGui.QApplication.UnicodeUTF8))
-        self.multicolorButton.setText(QtGui.QApplication.translate("MainWindow", "Multicolor", None, QtGui.QApplication.UnicodeUTF8))
-        self.whiteButton.setText(QtGui.QApplication.translate("MainWindow", "White", None, QtGui.QApplication.UnicodeUTF8))
-        self.resetFiltersButton.setText(QtGui.QApplication.translate("MainWindow", "Reset filters", None, QtGui.QApplication.UnicodeUTF8))
-        self.sideaboardRadioButton.setText(QtGui.QApplication.translate("MainWindow", "Sideboard", None, QtGui.QApplication.UnicodeUTF8))
-        self.deckRadioButton.setText(QtGui.QApplication.translate("MainWindow", "Deck", None, QtGui.QApplication.UnicodeUTF8))
-        self.bothRadioButton.setText(QtGui.QApplication.translate("MainWindow", "Both", None, QtGui.QApplication.UnicodeUTF8))
-        self.creatureButton.setText(QtGui.QApplication.translate("MainWindow", "Creature", None, QtGui.QApplication.UnicodeUTF8))
-        self.artifactButton.setText(QtGui.QApplication.translate("MainWindow", "Artifact", None, QtGui.QApplication.UnicodeUTF8))
-        self.nonCreatureButton.setText(QtGui.QApplication.translate("MainWindow", "Other Non-Creature Spells", None, QtGui.QApplication.UnicodeUTF8))
-        self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "MainWindow", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.sideBoardBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Sideboard(0)", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.deckBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Deck(0)", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.statsBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Quick deck statistics", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.cardImageBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Card Image", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.cardInfoBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Filters", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.landButton.setText(QtWidgets.QApplication.translate("MainWindow", "Land", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.blackButton.setText(QtWidgets.QApplication.translate("MainWindow", "Black", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.greenButton.setText(QtWidgets.QApplication.translate("MainWindow", "Green", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.blueButton.setText(QtWidgets.QApplication.translate("MainWindow", "Blue", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.redButton.setText(QtWidgets.QApplication.translate("MainWindow", "Red", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.multicolorButton.setText(QtWidgets.QApplication.translate("MainWindow", "Multicolor", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.whiteButton.setText(QtWidgets.QApplication.translate("MainWindow", "White", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.resetFiltersButton.setText(QtWidgets.QApplication.translate("MainWindow", "Reset filters", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.sideaboardRadioButton.setText(QtWidgets.QApplication.translate("MainWindow", "Sideboard", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.deckRadioButton.setText(QtWidgets.QApplication.translate("MainWindow", "Deck", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.bothRadioButton.setText(QtWidgets.QApplication.translate("MainWindow", "Both", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.creatureButton.setText(QtWidgets.QApplication.translate("MainWindow", "Creature", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.artifactButton.setText(QtWidgets.QApplication.translate("MainWindow", "Artifact", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.nonCreatureButton.setText(QtWidgets.QApplication.translate("MainWindow", "Other Non-Creature Spells", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.toolBar.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "toolBar", None, QtWidgets.QApplication.UnicodeUTF8))

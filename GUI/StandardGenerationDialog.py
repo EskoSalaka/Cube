@@ -7,14 +7,15 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = lambda s: s
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_Dialog(QtGui.QDialog):
+
+class Ui_Dialog(QtWidgets.QDialog):
     """
     Largely generated dialog to to create standard booster sealed deck pools.
     """
@@ -57,9 +58,9 @@ class Ui_Dialog(QtGui.QDialog):
         booster will generate.
         """
         
-        cardNumComboBox = QtGui.QComboBox()
-        rareComboBox = QtGui.QComboBox()
-        uncommonComboBox = QtGui.QComboBox()
+        cardNumComboBox = QtWidgets.QComboBox()
+        rareComboBox = QtWidgets.QComboBox()
+        uncommonComboBox = QtWidgets.QComboBox()
         
         for item in range(12, 91):
             cardNumComboBox.addItem(str(item))
@@ -69,9 +70,7 @@ class Ui_Dialog(QtGui.QDialog):
         
         for item in range(3, 30):
             uncommonComboBox.addItem(str(item))
-        
-        
-        
+
         cardNumComboBox.setCurrentIndex(3)
         cardNumComboBox.setMaximumWidth(40)
         
@@ -106,10 +105,9 @@ class Ui_Dialog(QtGui.QDialog):
         Handles clicks to the addButton
         """
         
-        treeItem = QtGui.QTreeWidgetItem([unicode(self.boosterComboBox.currentText())])
+        treeItem = QtWidgets.QTreeWidgetItem([self.boosterComboBox.currentText()])
         comboBoxes = self._getCardNumComboBoxes()
-        
-        
+
         self.boosterList.addTopLevelItem(treeItem)
         self.boosterList.setItemWidget(treeItem, 1, comboBoxes[0])
         self.boosterList.setItemWidget(treeItem, 2, comboBoxes[1])
@@ -141,7 +139,7 @@ class Ui_Dialog(QtGui.QDialog):
         
         for childIndex in range(self.boosterList.topLevelItemCount()):
             child = self.boosterList.topLevelItem(childIndex)
-            setName = unicode(child.text(0))
+            setName = child.text(0)
             numOfCards = int(self.boosterList.itemWidget(child, 1).currentText())
             numOfRares = int(self.boosterList.itemWidget(child, 2).currentText())
             numOfUncommons = int(self.boosterList.itemWidget(child, 3).currentText())
@@ -152,13 +150,13 @@ class Ui_Dialog(QtGui.QDialog):
                 setNames[setName].append((numOfCards, numOfRares, numOfUncommons))
 
         if not setNames:
-            QtGui.QMessageBox.warning(self, 'No boosters chosen', 
+            QtCore.warning(self, 'No boosters chosen',
                                             'No boosters chosen')
             return
 
         cards = []
         
-        for (setName, packNumDatas) in setNames.iteritems():
+        for (setName, packNumDatas) in setNames.items():
             for packNumData in packNumDatas:
                 cards.extend(self._mtgSets[setName].getRandomPack(packNumData[0],
                                                                   packNumData[1],
@@ -185,17 +183,19 @@ class Ui_Dialog(QtGui.QDialog):
         self._dialog = Dialog
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(312, 431)
-        self.gridLayout = QtGui.QGridLayout(Dialog)
-        self.gridLayout.setMargin(12)
+        self.gridLayout = QtWidgets.QGridLayout(Dialog)
+        print(8)
+
+        print(9)
         self.gridLayout.setSpacing(12)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.boosterList = QtGui.QTreeWidget(Dialog)
+        self.boosterList = QtWidgets.QTreeWidget(Dialog)
         self.boosterList.setObjectName(_fromUtf8("boosterList"))
         self.gridLayout.addWidget(self.boosterList, 0, 0, 1, 1)
-        spacerItem = QtGui.QSpacerItem(20, 10, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem, 4, 0, 1, 1)
-        self.boosterComboBox = QtGui.QComboBox(Dialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        self.boosterComboBox = QtWidgets.QComboBox(Dialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.boosterComboBox.sizePolicy().hasHeightForWidth())
@@ -204,31 +204,31 @@ class Ui_Dialog(QtGui.QDialog):
         self.boosterComboBox.setMaximumSize(QtCore.QSize(1000, 1000))
         self.boosterComboBox.setObjectName(_fromUtf8("boosterComboBox"))
         self.gridLayout.addWidget(self.boosterComboBox, 2, 0, 1, 1)
-        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setSpacing(12)
         self.horizontalLayout.setContentsMargins(12, 0, 12, 0)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.addButton = QtGui.QPushButton(Dialog)
+        self.addButton = QtWidgets.QPushButton(Dialog)
         self.addButton.setObjectName(_fromUtf8("addButton"))
         self.horizontalLayout.addWidget(self.addButton)
-        self.removeButton = QtGui.QPushButton(Dialog)
+        self.removeButton = QtWidgets.QPushButton(Dialog)
         self.removeButton.setObjectName(_fromUtf8("removeButton"))
         self.horizontalLayout.addWidget(self.removeButton)
         self.gridLayout.addLayout(self.horizontalLayout, 3, 0, 1, 1)
-        self.line = QtGui.QFrame(Dialog)
-        self.line.setFrameShape(QtGui.QFrame.HLine)
-        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line = QtWidgets.QFrame(Dialog)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.gridLayout.addWidget(self.line, 5, 0, 1, 1)
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setContentsMargins(-1, 0, -1, -1)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
-        self.generateButton = QtGui.QPushButton(Dialog)
+        self.generateButton = QtWidgets.QPushButton(Dialog)
         self.generateButton.setObjectName(_fromUtf8("generateButton"))
         self.horizontalLayout_2.addWidget(self.generateButton)
-        self.cancelButton = QtGui.QPushButton(Dialog)
+        self.cancelButton = QtWidgets.QPushButton(Dialog)
         self.cancelButton.setObjectName(_fromUtf8("cancelButton"))
         self.horizontalLayout_2.addWidget(self.cancelButton)
         self.gridLayout.addLayout(self.horizontalLayout_2, 6, 0, 1, 1)
@@ -239,11 +239,11 @@ class Ui_Dialog(QtGui.QDialog):
         self.__connectEvents()
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
-        self.addButton.setText(QtGui.QApplication.translate("Dialog", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.removeButton.setText(QtGui.QApplication.translate("Dialog", "Remove", None, QtGui.QApplication.UnicodeUTF8))
-        self.generateButton.setText(QtGui.QApplication.translate("Dialog", "Generate", None, QtGui.QApplication.UnicodeUTF8))
-        self.cancelButton.setText(QtGui.QApplication.translate("Dialog", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.setWindowTitle("Dialog")
+        self.addButton.setText("Add")
+        self.removeButton.setText("Remove")
+        self.generateButton.setText("Generate")
+        self.cancelButton.setText("Cancel")
         self.boosterList.setColumnCount(4)
         self.boosterList.setIndentation(5)
         self.boosterList.setHeaderLabels(['Set', 'Cards', 'Rares', 'Uncs'])

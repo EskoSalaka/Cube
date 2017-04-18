@@ -339,7 +339,7 @@ class StatisticsAnalyzer:
         
         manaSymbolsBar.clear()
         
-        for (color, num) in self._manaSymbols.iteritems():
+        for (color, num) in self._manaSymbols.items():
             if color == 'C':
                 continue
             
@@ -436,7 +436,7 @@ class StatisticsAnalyzer:
         arrangedColors = []
         fracs = []
         
-        for (color, num) in self._colors.iteritems():
+        for (color, num) in self._colors.items():
             if num:
                 fracs.append(self._colors[color])
                 arrangedColors.append(self._matplotlibColors[color])

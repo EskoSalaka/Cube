@@ -1,21 +1,23 @@
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = lambda s: s
 except AttributeError:
     def _fromUtf8(s):
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
+
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
-class Ui_LandImageDialog(QtGui.QDialog):
+
+class Ui_LandImageDialog(QtWidgets.QDialog):
     """
     Largely generated dialog to choose and set the basic land images to use
     with MWS.
@@ -84,8 +86,6 @@ class Ui_LandImageDialog(QtGui.QDialog):
         """
         Handles the land combo box's index changes.
         """
-        
-        print self.landComboBox.currentText()
 
         self._setCurrentLands(str(self.landComboBox.currentText()))
 
@@ -119,7 +119,6 @@ class Ui_LandImageDialog(QtGui.QDialog):
             text = mtgSetName + altArt + '(' + setCode + ')'
             self.imageComboBox.addItem(text)
             self._currentLands[text] = basicLand
-            
 
         self._setCurrentIndex()
 
@@ -131,8 +130,7 @@ class Ui_LandImageDialog(QtGui.QDialog):
 
         if self.landComboBox.currentText() == 'Forest':
             land = self._mainFrameParent._forest
-            
-        
+
         elif self.landComboBox.currentText() == 'Plains':
             land = self._mainFrameParent._plains
         
@@ -151,7 +149,6 @@ class Ui_LandImageDialog(QtGui.QDialog):
         
         text = mtgSetName + altArt + '(' + setCode + ')'
         index = self.imageComboBox.findText(text)
-        print index
         self.imageComboBox.setCurrentIndex(index)
         
         #self._imageComboBoxHighlighted(index)
@@ -163,9 +160,9 @@ class Ui_LandImageDialog(QtGui.QDialog):
     def setupUi(self, LandImageDialog):
         LandImageDialog.setObjectName(_fromUtf8("LandImageDialog"))
         LandImageDialog.resize(300, 127)
-        self.verticalLayout = QtGui.QVBoxLayout(LandImageDialog)
+        self.verticalLayout = QtWidgets.QVBoxLayout(LandImageDialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setContentsMargins(10, 30, 10, 10)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.landComboBox = QtGui.QComboBox(LandImageDialog)
@@ -176,8 +173,8 @@ class Ui_LandImageDialog(QtGui.QDialog):
         self.landComboBox.addItem(_fromUtf8(""))
         self.landComboBox.addItem(_fromUtf8(""))
         self.horizontalLayout.addWidget(self.landComboBox)
-        self.imageComboBox = QtGui.QComboBox(LandImageDialog)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        self.imageComboBox = QtWidgets.QComboBox(LandImageDialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.imageComboBox.sizePolicy().hasHeightForWidth())
@@ -185,24 +182,24 @@ class Ui_LandImageDialog(QtGui.QDialog):
         self.imageComboBox.setMinimumSize(QtCore.QSize(100, 0))
         self.imageComboBox.setObjectName(_fromUtf8("imageComboBox"))
         self.horizontalLayout.addWidget(self.imageComboBox)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.setButton = QtGui.QPushButton(LandImageDialog)
+        self.setButton = QtWidgets.QPushButton(LandImageDialog)
         self.setButton.setObjectName(_fromUtf8("setButton"))
         self.horizontalLayout.addWidget(self.setButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
-        self.line = QtGui.QFrame(LandImageDialog)
-        self.line.setFrameShape(QtGui.QFrame.HLine)
-        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line = QtWidgets.QFrame(LandImageDialog)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.verticalLayout.addWidget(self.line)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
-        self.doneButton = QtGui.QPushButton(LandImageDialog)
+        self.doneButton = QtWidgets.QPushButton(LandImageDialog)
         self.doneButton.setObjectName(_fromUtf8("doneButton"))
         self.horizontalLayout_3.addWidget(self.doneButton)
         self.verticalLayout.addLayout(self.horizontalLayout_3)

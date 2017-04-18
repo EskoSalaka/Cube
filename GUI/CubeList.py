@@ -4,11 +4,12 @@
 """CubeList class module."""
 from collections import defaultdict
 
-from PyQt4 import QtGui, QtCore
-from TreeCardItem import TreeCardItem
+from PyQt5 import QtGui, QtCore, QtWidgets
+from .TreeCardItem import TreeCardItem
+
 
 ################################################################################
-class CubeList(QtGui.QTreeWidget):
+class CubeList(QtWidgets.QTreeWidget):
     """A listview of cards. """
 
 #-------------------------------------------------------------------------------
@@ -42,9 +43,9 @@ class CubeList(QtGui.QTreeWidget):
     def __setup(self):
         """Sets up the treewiev with wanted properties."""
         
-        self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.setSelectionMode(self.ExtendedSelection)
-        self.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.setMouseTracking(True)
         #self.setColumnCount(6)
         self.setSortingEnabled(True)
@@ -56,25 +57,25 @@ class CubeList(QtGui.QTreeWidget):
 
         labels = ['Name', 'Cost', 'Set', 'Color', 'Type', 'Qty']
         header = self.headerItem()
-        self.setHeaderLabels(QtCore.QStringList(labels))
+        self.setHeaderLabels(QtWidgets.QStringList(labels))
         header.setText(0, "Card")
         
 #-------------------------------------------------------------------------------
     def __showContextMenu(self, pos):
         """Shows the context menu of the card list."""
-        
-        contextMenu = QtGui.QMenu(self)
-        
+
+        contextMenu = QtWidgets.QMenu(self)
+
         contextMenu.addAction('Move/Remove cards', self.__transferSelected)
         contextMenu.addAction('Hide selected cards', self.hideSelected)
-        
+
         contextMenu.addSeparator()
-        
+
         contextMenu.addAction('Collapse all seperators', self.__collapseAll)
         contextMenu.addAction('Expand all seperators', self.__expandAll)
-        
+
         contextMenu.exec_(self.mapToGlobal(pos))
-        
+
 #-------------------------------------------------------------------------------
     def __mergeImages(self, imagePaths):
         """
@@ -111,49 +112,49 @@ class CubeList(QtGui.QTreeWidget):
         included in these.
         """
         
-        B = QtGui.QTreeWidgetItem('')
+        B = QtWidgets.QTreeWidgetItem('')
         B.setText(0, 'Black')
         B.setFont(0, self._font)
         B.setData(0,1,QtGui.QPixmap('Manasymbols\small\B.gif'))
         
-        G = QtGui.QTreeWidgetItem('')
+        G = QtWidgets.QTreeWidgetItem('')
         G.setText(0, 'Green')
         G.setFont(0, self._font)
         G.setData(0,1,QtGui.QPixmap('Manasymbols\small\G.gif'))
         
-        R = QtGui.QTreeWidgetItem('')
+        R = QtWidgets.QTreeWidgetItem('')
         R.setText(0, 'Red')
         R.setFont(0, self._font)
         R.setData(0,1,QtGui.QPixmap('Manasymbols\small\R.gif'))
         
-        U = QtGui.QTreeWidgetItem('')
+        U = QtWidgets.QTreeWidgetItem('')
         U.setText(0, 'Blue')
         U.setFont(0, self._font)
-        U.setData(0,1,QtGui.QPixmap('Manasymbols\small\U.gif'))
+        U.setData(0,1,QtGui.QPixmap('Manasymbols\small\\U.gif'))
         
-        W = QtGui.QTreeWidgetItem('')
+        W = QtWidgets.QTreeWidgetItem('')
         W.setText(0, 'White')
         W.setFont(0, self._font)
         W.setData(0,1,QtGui.QPixmap('Manasymbols\small\W.gif'))
         
-        M = QtGui.QTreeWidgetItem('')
+        M = QtWidgets.QTreeWidgetItem('')
         M.setText(0, 'Multicolor')
         M.setFont(0, self._font)
         
         paths = ['Manasymbols\small\B.gif', 
-                 'Manasymbols\small\U.gif',
+                 'Manasymbols\small\\U.gif',
                  'Manasymbols\small\W.gif', 
                  'Manasymbols\small\R.gif',
                  'Manasymbols\small\G.gif']
         
         M.setData(0,1,QtGui.QPixmap(self.__mergeImages(paths)))
         
-        C = QtGui.QTreeWidgetItem('')
+        C = QtWidgets.QTreeWidgetItem('')
         C.setText(0, 'Colorless/Artifact')
         C.setFont(0, self._font)
         C.setData(0,1,QtGui.QPixmap('Manasymbols\small\Artifact.jpg'))
         
-        lands = QtGui.QTreeWidgetItem('')
+        lands = QtWidgets.QTreeWidgetItem('')
         lands.setText(0, 'Land')
         lands.setFont(0, self._font)
         lands.setData(0,1,QtGui.QPixmap('Manasymbols\small\Land.jpg'))
@@ -173,12 +174,12 @@ class CubeList(QtGui.QTreeWidget):
                             'Manasymbols\small\Sorcery.jpg',
                             'Manasymbols\small\Enchantment.jpg']
         
-        creatures = QtGui.QTreeWidgetItem('')
+        creatures = QtWidgets.QTreeWidgetItem('')
         creatures.setText(0, 'Creatures')
         creatures.setFont(0, self._font)
         creatures.setData(0,1,QtGui.QPixmap('Manasymbols\small\Creature.jpg'))
         
-        nonCreatureSpells = QtGui.QTreeWidgetItem('')
+        nonCreatureSpells = QtWidgets.QTreeWidgetItem('')
         nonCreatureSpells.setText(0, 'Non-creature spells')
         nonCreatureSpells.setFont(0, self._font)
         nonCreatureSpells.setData(0,1,QtGui.QPixmap(self.__mergeImages(nonCreaturePaths)))
@@ -191,37 +192,37 @@ class CubeList(QtGui.QTreeWidget):
         Creates and returns seperators for casting cost. 
         """
         
-        CC0 = QtGui.QTreeWidgetItem('')
+        CC0 = QtWidgets.QTreeWidgetItem('')
         CC0.setText(0, '')
         CC0.setFont(0, self._font)
         CC0.setData(0,1,QtGui.QPixmap('Manasymbols\small\\0.gif'))
         
-        CC1 = QtGui.QTreeWidgetItem('')
+        CC1 = QtWidgets.QTreeWidgetItem('')
         CC1.setText(0, '')
         CC1.setFont(0, self._font)
         CC1.setData(0,1,QtGui.QPixmap('Manasymbols\small\\1.gif'))
         
-        CC2 = QtGui.QTreeWidgetItem('')
+        CC2 = QtWidgets.QTreeWidgetItem('')
         CC2.setText(0, '')
         CC2.setFont(0, self._font)
         CC2.setData(0,1,QtGui.QPixmap('Manasymbols\small\\2.gif'))
         
-        CC3 = QtGui.QTreeWidgetItem('')
+        CC3 = QtWidgets.QTreeWidgetItem('')
         CC3.setText(0, '')
         CC3.setFont(0, self._font)
         CC3.setData(0,1,QtGui.QPixmap('Manasymbols\small\\3.gif'))
         
-        CC4 = QtGui.QTreeWidgetItem('')
+        CC4 = QtWidgets.QTreeWidgetItem('')
         CC4.setText(0, '')
         CC4.setFont(0, self._font)
         CC4.setData(0,1,QtGui.QPixmap('Manasymbols\small\\4.gif'))
         
-        CC5 = QtGui.QTreeWidgetItem('')
+        CC5 = QtWidgets.QTreeWidgetItem('')
         CC5.setText(0, '')
         CC5.setFont(0, self._font)
         CC5.setData(0,1,QtGui.QPixmap('Manasymbols\small\\5.gif'))
         
-        CC6 = QtGui.QTreeWidgetItem('')
+        CC6 = QtWidgets.QTreeWidgetItem('')
         CC6.setText(0, '')
         CC6.setFont(0, self._font)
         CC6.setData(0,1,QtGui.QPixmap(self.__mergeImages(['Manasymbols\small\\6.gif', 'Manasymbols\small\\Plus.png'])))
@@ -496,7 +497,7 @@ class CubeList(QtGui.QTreeWidget):
                 
                 if progressDialog:
                     progressDialog.setValue(steps)
-                    QtGui.QApplication.processEvents()
+                    QtWidgets.QApplication.processEvents()
         
         seperator = self._seperators['C']['Land'][0]
         cards = cardItems['C']['Land'][0]
@@ -506,7 +507,7 @@ class CubeList(QtGui.QTreeWidget):
         steps += 1
         if progressDialog:
             progressDialog.setValue(steps)
-            QtGui.QApplication.processEvents()
+            QtWidgets.QApplication.processEvents()
         
         self.setSortingEnabled(True)
         self.resizeColumns()

@@ -1,28 +1,23 @@
-#!/usr/bin/python
-# -*- coding: latin-1 -*-
-
-"""SetsTreeWidget class module."""
-
-
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = lambda s: s
 except AttributeError:
     def _fromUtf8(s):
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
+
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 
 ################################################################################
-class SetsTreeWidget(QtGui.QTreeWidget):
+class SetsTreeWidget(QtWidgets.QTreeWidget):
     """
     A tree view of mtg sets. This view is used in updating/editing the database.
     It displays list of mtg expansions, core sets and other sets.
@@ -33,8 +28,7 @@ class SetsTreeWidget(QtGui.QTreeWidget):
         
         #-----------------------------------------------
         super(SetsTreeWidget, self).__init__(parent)
-        
-        
+
         #-----------------------------------------------
         self._topLevelItems = {}
         self._mtgSetNameItems = {}
@@ -52,15 +46,15 @@ class SetsTreeWidget(QtGui.QTreeWidget):
         
         seperatorFont = QtGui.QFont('Matrix Bold', 10, QtGui.QFont.Bold)
         
-        expansionsItem = QtGui.QTreeWidgetItem(self)
+        expansionsItem = QtWidgets.QTreeWidgetItem(self)
         expansionsItem.setText(0, 'Expansions')
         expansionsItem.setFont(0, seperatorFont)
         
-        coresetsItem = QtGui.QTreeWidgetItem(self)
+        coresetsItem = QtWidgets.QTreeWidgetItem(self)
         coresetsItem.setText(0, 'Core Sets')
         coresetsItem.setFont(0, seperatorFont)
         
-        specialsItem = QtGui.QTreeWidgetItem(self)
+        specialsItem = QtWidgets.QTreeWidgetItem(self)
         specialsItem.setText(0, 'Specials&Other')
         specialsItem.setFont(0, seperatorFont)
         
@@ -93,7 +87,7 @@ class SetsTreeWidget(QtGui.QTreeWidget):
         """Adds a structured list of mtg sets to the tree."""
         
         for (mtgSetName, mtgSetCode) in mtgSets['Expansion'].iteritems():
-            newItem = QtGui.QTreeWidgetItem(self._topLevelItems['Expansions'])
+            newItem = QtWidgets.QTreeWidgetItem(self._topLevelItems['Expansions'])
             newItem.setText(0, mtgSetName)
             newItem.setText(1, mtgSetCode)
             newItem.setFlags(QtCore.Qt.ItemIsUserCheckable | 
@@ -102,10 +96,9 @@ class SetsTreeWidget(QtGui.QTreeWidget):
             newItem.setCheckState(0, QtCore.Qt.Unchecked)
             newItem.isNew = False
             self._mtgSetNameItems[mtgSetName] = newItem
-            
-            
+
         for (mtgSetName, mtgSetCode) in mtgSets['Core Set'].iteritems():
-            newItem = QtGui.QTreeWidgetItem(self._topLevelItems['Core Sets'])
+            newItem = QtWidgets.QTreeWidgetItem(self._topLevelItems['Core Sets'])
             newItem.setText(0, mtgSetName)
             newItem.setText(1, mtgSetCode)
             newItem.setFlags(QtCore.Qt.ItemIsUserCheckable | 
@@ -116,7 +109,7 @@ class SetsTreeWidget(QtGui.QTreeWidget):
             self._mtgSetNameItems[mtgSetName] = newItem
         
         for (mtgSetName, mtgSetCode) in mtgSets['Special'].iteritems():
-            newItem = QtGui.QTreeWidgetItem(self._topLevelItems['Specials&Other'])
+            newItem = QtWidgets.QTreeWidgetItem(self._topLevelItems['Specials&Other'])
             newItem.setText(0, mtgSetName)
             newItem.setText(1, mtgSetCode)
             newItem.setFlags(QtCore.Qt.ItemIsUserCheckable | 
@@ -151,8 +144,8 @@ class SetsTreeWidget(QtGui.QTreeWidget):
         for mtgSetName in self._mtgSetNameItems.keys():
             if mtgSetName in newMtgSets:
                 listItem = self._mtgSetNameItems[mtgSetName]
-                listItem.setBackground(0, QtGui.QBrush(QtGui.QColor(200,0,0,50)))
-                listItem.setBackground(1, QtGui.QBrush(QtGui.QColor(200,0,0,50)))
+                listItem.setBackground(0, QtGui.QBrush(QtGui.QColor(200, 0, 0, 50)))
+                listItem.setBackground(1, QtGui.QBrush(QtGui.QColor(200, 0, 0, 50)))
                 listItem.isNew = True
 
 #-------------------------------------------------------------------------------

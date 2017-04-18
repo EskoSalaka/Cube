@@ -1,9 +1,9 @@
 """The MainWindowMenuBar class module."""
 
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 
 ################################################################################
-class CubeEditorMenuBar(QtGui.QMenuBar):
+class CubeEditorMenuBar(QtWidgets.QMenuBar):
     """menubar for the CubeEditor."""
 
 #-------------------------------------------------------------------------------
@@ -16,19 +16,19 @@ class CubeEditorMenuBar(QtGui.QMenuBar):
         #------------------------
         fileMenu = QtGui.QMenu('&File', self)
         
-        exitAction = QtGui.QAction('&Quit', self)        
+        exitAction = QtWidgets.QAction('&Quit', self)
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(self._quit)
         
-        newCubeAction = QtGui.QAction('&New cube', self)        
+        newCubeAction = QtWidgets.QAction('&New cube', self)
         newCubeAction.setStatusTip('New cube')
         newCubeAction.triggered.connect(self._newCube)
         
-        saveCubeAction = QtGui.QAction('&Save cube as', self)        
+        saveCubeAction = QtWidgets.QAction('&Save cube as', self)
         saveCubeAction.setStatusTip('Save cube as')
         saveCubeAction.triggered.connect(self._saveCubeAs)
         
-        openCubeAction = QtGui.QAction('&Open a cube', self)        
+        openCubeAction = QtWidgets.QAction('&Open a cube', self)
         openCubeAction.setStatusTip('Open a cube')
         openCubeAction.triggered.connect(self._openCube)
         
@@ -37,15 +37,15 @@ class CubeEditorMenuBar(QtGui.QMenuBar):
         fileMenu.addActions([exitAction])
         
         #------------------------
-        toolsMenu = QtGui.QMenu('&Tools', self)
+        toolsMenu = QtWidgets.QMenu('&Tools', self)
         
-        readFromTxtAction = QtGui.QAction('&Read a cube from a text file', self)        
+        readFromTxtAction = QtWidgets.QAction('&Read a cube from a text file', self)
         readFromTxtAction.triggered.connect(self._readFromTxtFile)
         
-        readFromMwsAction = QtGui.QAction('&Read a cube from a MWS deck file', self)        
+        readFromMwsAction = QtWidgets.QAction('&Read a cube from a MWS deck file', self)
         readFromMwsAction.triggered.connect(self._readFromMwsFile)
         
-        cubeToTxtFileAction = QtGui.QAction('&Write the cube in a text file as a sorted list', self)        
+        cubeToTxtFileAction = QtWidgets.QAction('&Write the cube in a text file as a sorted list', self)
         cubeToTxtFileAction.triggered.connect(self._cubeToSortedTxtFile)
         
         toolsMenu.addActions([readFromTxtAction, readFromMwsAction, cubeToTxtFileAction])

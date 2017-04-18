@@ -1,9 +1,9 @@
 """The MainWindowToolBar class module."""
 
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 
 ################################################################################
-class MainWindowToolBar(QtGui.QToolBar):
+class MainWindowToolBar(QtWidgets.QToolBar):
     """Toolbar for the mainWindow."""
 
 #-------------------------------------------------------------------------------
@@ -13,27 +13,27 @@ class MainWindowToolBar(QtGui.QToolBar):
         super(MainWindowToolBar, self).__init__(parent)
         self._mainFrameParent = mainFrameParent
         
-        openAction = QtGui.QAction(QtGui.QIcon('Icons\open.ico'), 'Open deck', self)
+        openAction = QtWidgets.QAction(QtGui.QIcon('Icons\open.ico'), 'Open deck', self)
         openAction.setStatusTip('Open a deck')
         openAction.triggered.connect(self._open)
         
-        saveAction = QtGui.QAction(QtGui.QIcon('Icons\save.ico'), 'Save deck', self)
+        saveAction = QtWidgets.QAction(QtGui.QIcon('Icons\save.ico'), 'Save deck', self)
         saveAction.setStatusTip('Save deck as')
         saveAction.triggered.connect(self._save)
         
-        statsAction = QtGui.QAction(QtGui.QIcon('Icons\statistics.ico'), 'Deep analysis', self)
+        statsAction = QtWidgets.QAction(QtGui.QIcon('Icons\statistics.ico'), 'Deep analysis', self)
         statsAction.setStatusTip('Deep analysis')
         statsAction.triggered.connect(self._stats)
 
-        resizeAction = QtGui.QAction(QtGui.QIcon('Icons\save2'), 'Resize columns to contents', self)
+        resizeAction = QtWidgets.QAction(QtGui.QIcon('Icons\save2'), 'Resize columns to contents', self)
         resizeAction.setStatusTip('Resize columns to contents')
         resizeAction.triggered.connect(self._resize)
         
-        openCubeEditorAction = QtGui.QAction(QtGui.QIcon('Icons\cube'), 'Open cube editor', self)
+        openCubeEditorAction = QtWidgets.QAction(QtGui.QIcon('Icons\cube'), 'Open cube editor', self)
         openCubeEditorAction.setStatusTip('Open cube editor')
         openCubeEditorAction.triggered.connect(self._openCubeEditor)
         
-        refreshAction = QtGui.QAction(QtGui.QIcon('Icons\gtk_refresh'), 'Refresh', self)
+        refreshAction = QtWidgets.QAction(QtGui.QIcon('Icons\gtk_refresh'), 'Refresh', self)
         refreshAction.setStatusTip('Refresh the gui')
         refreshAction.triggered.connect(self._refresh)
         

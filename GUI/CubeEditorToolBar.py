@@ -1,9 +1,10 @@
 """The CubeEditorToolBar class module."""
 
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
+
 
 ################################################################################
-class CubeEditorToolBar(QtGui.QToolBar):
+class CubeEditorToolBar(QtWidgets.QToolBar):
     """Toolbar for the mainWindow."""
 
 #-------------------------------------------------------------------------------
@@ -13,26 +14,26 @@ class CubeEditorToolBar(QtGui.QToolBar):
         super(CubeEditorToolBar, self).__init__(parent)
         self._mainFrameParent = mainFrameParent
         
-        openAction = QtGui.QAction(QtGui.QIcon('Icons\open.ico'), 'Open cube', self)
+        openAction = QtWidgets.QAction(QtGui.QIcon('Icons\open.ico'), 'Open cube', self)
         openAction.setStatusTip('Open a cube')
         openAction.triggered.connect(self._open)
         
-        saveAction = QtGui.QAction(QtGui.QIcon('Icons\save.ico'), 'Save cube', self)
+        saveAction = QtWidgets.QAction(QtGui.QIcon('Icons\save.ico'), 'Save cube', self)
         saveAction.setShortcut('Ctrl+S')
         saveAction.setStatusTip('Save cube as')
         saveAction.triggered.connect(self._save)
         
-        statsAction = QtGui.QAction(QtGui.QIcon('Icons\statistics.ico'), 'Deep analysis', self)
+        statsAction = QtWidgets.QAction(QtGui.QIcon('Icons\statistics.ico'), 'Deep analysis', self)
         statsAction.setShortcut('Ctrl+A')
         statsAction.setStatusTip('Deep analysis')
         statsAction.triggered.connect(self._stats)
         
-        self._colorAction = QtGui.QAction(QtGui.QIcon('Icons\color.ico'), 'Color the cards which are already in the cube', self)
+        self._colorAction = QtWidgets.QAction(QtGui.QIcon('Icons\color.ico'), 'Color the cards which are already in the cube', self)
         self._colorAction.setShortcut('Ctrl+D')
         self._colorAction.setStatusTip('Color the cards which are already in the cube')
         self._colorAction.triggered.connect(self._colorCards)
 
-        resizeAction = QtGui.QAction(QtGui.QIcon('Icons\resize.ico'), 'Resize columns to contents', self)
+        resizeAction = QtWidgets.QAction(QtGui.QIcon('Icons\resize.ico'), 'Resize columns to contents', self)
         resizeAction.setShortcut('Ctrl+R')
         resizeAction.setStatusTip('Resize columns to contents')
         resizeAction.triggered.connect(self._resize)

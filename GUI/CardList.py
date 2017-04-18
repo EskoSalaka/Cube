@@ -123,32 +123,32 @@ class CardList(QtWidgets.QTreeWidget):
         
         #-----------------------------------------------
         #Colors
-        self._B = QtWidgets.QTreeWidgetItem('')
+        self._B = QtWidgets.QTreeWidgetItem()
         self._B.setText(0, 'Black')
         self._B.setFont(0, seperatorFont)
         self._B.setData(0, 1, QtGui.QPixmap('Manasymbols\small\B.gif'))
         
-        self._G = QtWidgets.QTreeWidgetItem('')
+        self._G = QtWidgets.QTreeWidgetItem()
         self._G.setText(0, 'Green')
         self._G.setFont(0, seperatorFont)
         self._G.setData(0, 1, QtGui.QPixmap('Manasymbols\small\G.gif'))
         
-        self._R = QtWidgets.QTreeWidgetItem('')
+        self._R = QtWidgets.QTreeWidgetItem()
         self._R.setText(0, 'Red')
         self._R.setFont(0, seperatorFont)
         self._R.setData(0, 1, QtGui.QPixmap('Manasymbols\small\R.gif'))
         
-        self._U = QtWidgets.QTreeWidgetItem('')
+        self._U = QtWidgets.QTreeWidgetItem()
         self._U.setText(0, 'Blue')
         self._U.setFont(0, seperatorFont)
         self._U.setData(0, 1, QtGui.QPixmap('Manasymbols\small\\U.gif'))
         
-        self._W = QtWidgets.QTreeWidgetItem('')
+        self._W = QtWidgets.QTreeWidgetItem()
         self._W.setText(0, 'White')
         self._W.setFont(0, seperatorFont)
         self._W.setData(0, 1, QtGui.QPixmap('Manasymbols\small\W.gif'))
         
-        self._M = QtWidgets.QTreeWidgetItem('')
+        self._M = QtWidgets.QTreeWidgetItem()
         self._M.setText(0, 'Multicolor')
         self._M.setFont(0, seperatorFont)
         
@@ -159,52 +159,52 @@ class CardList(QtWidgets.QTreeWidget):
                  'Manasymbols\small\G.gif']
         self._M.setData(0, 1, QtGui.QPixmap(self.__mergeImages(paths)))
         
-        self._artifacts = QtWidgets.QTreeWidgetItem('')
+        self._artifacts = QtWidgets.QTreeWidgetItem()
         self._artifacts.setText(0, 'Colorless/Artifacts')
         self._artifacts.setFont(0, seperatorFont)
         self._artifacts.setData(0, 1, QtGui.QPixmap('Manasymbols\small\Artifact.jpg'))
         
         #-----------------------------------------------
         #Casting costs
-        self._0CC = QtWidgets.QTreeWidgetItem('')
+        self._0CC = QtWidgets.QTreeWidgetItem()
         self._0CC.setText(0, '')
         self._0CC.setFont(0, seperatorFont)
         self._0CC.setData(0, 1, QtGui.QPixmap('Manasymbols\small\\0.gif'))
         
-        self._1CC = QtWidgets.QTreeWidgetItem('')
+        self._1CC = QtWidgets.QTreeWidgetItem()
         self._1CC.setText(0, '')
         self._1CC.setFont(0, seperatorFont)
         self._1CC.setData(0, 1, QtGui.QPixmap('Manasymbols\small\\1.gif'))
         
-        self._2CC = QtWidgets.QTreeWidgetItem('')
+        self._2CC = QtWidgets.QTreeWidgetItem()
         self._2CC.setText(0, '')
         self._2CC.setFont(0, seperatorFont)
         self._2CC.setData(0,1,QtGui.QPixmap('Manasymbols\small\\2.gif'))
         
-        self._3CC = QtWidgets.QTreeWidgetItem('')
+        self._3CC = QtWidgets.QTreeWidgetItem()
         self._3CC.setText(0, '')
         self._3CC.setFont(0, seperatorFont)
         self._3CC.setData(0, 1, QtGui.QPixmap('Manasymbols\small\\3.gif'))
         
-        self._4CC = QtWidgets.QTreeWidgetItem('')
+        self._4CC = QtWidgets.QTreeWidgetItem()
         self._4CC.setText(0, '')
         self._4CC.setFont(0, seperatorFont)
         self._4CC.setData(0, 1, QtGui.QPixmap('Manasymbols\small\\4.gif'))
         
-        self._5CC = QtWidgets.QTreeWidgetItem('')
+        self._5CC = QtWidgets.QTreeWidgetItem()
         self._5CC.setText(0, '')
         self._5CC.setFont(0, seperatorFont)
         self._5CC.setData(0, 1, QtGui.QPixmap('Manasymbols\small\\5.gif'))
         
         paths = ['Manasymbols\small\\6.gif', 'Manasymbols\small\\Plus.png']
-        self._6CC = QtWidgets.QTreeWidgetItem('')
+        self._6CC = QtWidgets.QTreeWidgetItem()
         self._6CC.setText(0, '')
         self._6CC.setFont(0, seperatorFont)
         self._6CC.setData(0, 1, QtGui.QPixmap(self.__mergeImages(paths)))
         
         #-----------------------------------------------
         #Types
-        self._creatures = QtWidgets.QTreeWidgetItem('')
+        self._creatures = QtWidgets.QTreeWidgetItem()
         self._creatures.setText(0, 'Creatures')
         self._creatures.setFont(0, seperatorFont)
         self._creatures.setData(0, 1, QtGui.QPixmap('Manasymbols\small\Creature.jpg'))
@@ -213,12 +213,12 @@ class CardList(QtWidgets.QTreeWidget):
                  'Manasymbols\small\Sorcery.jpg',
                  'Manasymbols\small\Enchantment.jpg']
         
-        self._nonCreatureSpells = QtWidgets.QTreeWidgetItem('')
+        self._nonCreatureSpells = QtWidgets.QTreeWidgetItem()
         self._nonCreatureSpells.setText(0, 'Non-creatures')
         self._nonCreatureSpells.setFont(0, seperatorFont)
         self._nonCreatureSpells.setData(0, 1, QtGui.QPixmap(self.__mergeImages(paths)))
         
-        self._lands = QtWidgets.QTreeWidgetItem('')
+        self._lands = QtWidgets.QTreeWidgetItem()
         self._lands.setText(0, 'Lands')
         self._lands.setFont(0, seperatorFont)
         self._lands.setData(0, 1, QtGui.QPixmap('Manasymbols\small\Land.jpg'))

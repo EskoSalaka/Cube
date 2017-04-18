@@ -50,31 +50,31 @@ class Database:
                     self.getMtgSet(mtgSetName=origMtgSetName).name = newMtgSetName
                     self._mtgSets[newMtgSetName] = self._mtgSets.pop(origMtgSetName)
                 except AttributeError:
-                    print '{mtgSetName} not found in the database'.format(mtgSetName=origMtgSetName)
+                    print('{mtgSetName} not found in the database'.format(mtgSetName=origMtgSetName))
             
             if newMtgSetCode:
                 try:
                     self.getMtgSet(mtgSetName=origMtgSetName).setCode = newMtgSetCode
                 except AttributeError:
-                    print '{mtgSetCode} not found in the database'.format(mtgSetCode=origMtgSetCode)
-        
+                    print('{mtgSetCode} not found in the database'.format(mtgSetCode=origMtgSetCode))
+
         if origMtgSetCode:
             if newMtgSetName:
                 try:
                     self.getMtgSet(mtgSetCode=origMtgSetCode).name = newMtgSetName
                     self._mtgSets[newMtgSetName] = self._mtgSets.pop(origMtgSetName)
                 except AttributeError:
-                    print '{mtgSetName} not found in the database'.format(mtgSetName=origMtgSetName)
-            
+                    print('{mtgSetName} not found in the database'.format(mtgSetName=origMtgSetName))
+
             if newMtgSetCode:
                 try:
                     self.getMtgSet(mtgSetCode=origMtgSetCode).setCode = newMtgSetCode
                 except AttributeError:
-                    print '{mtgSetCode} not found in the database'.format(mtgSetCode=origMtgSetCode)
-        
-        
-        
-#-------------------------------------------------------------------------------
+                    print('{mtgSetCode} not found in the database'.format(mtgSetCode=origMtgSetCode))
+
+
+
+                #-------------------------------------------------------------------------------
     def getCards(self, cardName):
         """
         Returns all the cards instances in the database of 

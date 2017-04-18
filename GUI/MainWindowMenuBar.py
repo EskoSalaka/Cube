@@ -1,34 +1,36 @@
 """The MainWindowMenuBar class module."""
 
-from PyQt4 import QtGui
-from StandardGenerationDialog import Ui_Dialog as StandardGenerationDialog
-from BasicLandDialog import Ui_LandImageDialog as BasicLandDialog
-from SetNameEditorDialog import SetNameEditorDialog
-from UpdateDialog import UpdateDialog
+from PyQt5 import QtWidgets
+from .StandardGenerationDialog import Ui_Dialog as StandardGenerationDialog
+from .BasicLandDialog import Ui_LandImageDialog as BasicLandDialog
+from .SetNameEditorDialog import SetNameEditorDialog
+from .UpdateDialog import UpdateDialog
 
 ################################################################################
-class MainWindowMenuBar(QtGui.QMenuBar):
+class MainWindowMenuBar(QtWidgets.QMenuBar):
     """menubar for the mainWindow."""
 
 #-------------------------------------------------------------------------------
     def __init__(self, parent, mainFrameParent):
         """"""
+        print(100)
         
         super(MainWindowMenuBar, self).__init__(parent)
+        print(100)
         self._mainFrameParent = mainFrameParent
-        
+        print(100)
         #------------------------
-        fileMenu = QtGui.QMenu('&File', self)
+        fileMenu = QtWidgets.QMenu('&File', self)
         
-        exitAction = QtGui.QAction('&Quit', self)        
+        exitAction = QtWidgets.QAction('&Quit', self)
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(self._quit)
-        
-        saveDeckAction = QtGui.QAction('&Save deck as', self)        
+        print(100)
+        saveDeckAction = QtWidgets.QAction('&Save deck as', self)
         saveDeckAction.setStatusTip('Save deck as')
         saveDeckAction.triggered.connect(self._saveDeckAs)
         
-        openDeckAction = QtGui.QAction('&Open a deck', self)        
+        openDeckAction = QtWidgets.QAction('&Open a deck', self)
         openDeckAction.setStatusTip('Open a deck')
         openDeckAction.triggered.connect(self._openDeck)
         
@@ -37,24 +39,24 @@ class MainWindowMenuBar(QtGui.QMenuBar):
         fileMenu.addActions([exitAction])
         
         #------------------------
-        sealedMenu = QtGui.QMenu('&Sealed deck generation', self)
+        sealedMenu = QtWidgets.QMenu('&Sealed deck generation', self)
         
-        standardAction = QtGui.QAction('&Standard sealed deck', self)        
+        standardAction = QtWidgets.QAction('&Standard sealed deck', self)
         standardAction.setStatusTip('Generate a standard booster sealed deck')
         standardAction.triggered.connect(self._standardSealed)
         
-        cubeMenu = QtGui.QMenu('&Sealed deck from a cube', self)
+        cubeMenu = QtWidgets.QMenu('&Sealed deck from a cube', self)
         sealedMenu.addMenu(cubeMenu)
         
-        fromMWSDeckAction = QtGui.QAction('&.MWSDeck file', self)        
+        fromMWSDeckAction = QtWidgets.QAction('&.MWSDeck file', self)
         fromMWSDeckAction.setStatusTip('Generate a sealed deck from a custom cube in MWSDeck format')
         fromMWSDeckAction.triggered.connect(self._cubeSealedFromMWSDeck)
         
-        fromCubeFileAction = QtGui.QAction('&.Cube file', self)        
+        fromCubeFileAction = QtWidgets.QAction('&.Cube file', self)
         fromCubeFileAction.setStatusTip('Generate a sealed deck from a custom cube in .cube file')
         fromCubeFileAction.triggered.connect(self._cubeSealedFromCubeFile)
         
-        fromTextFileAction = QtGui.QAction('&.txt file', self)        
+        fromTextFileAction = QtWidgets.QAction('&.txt file', self)
         fromTextFileAction.setStatusTip('Generate a sealed deck from a custom cube in .txt file')
         fromTextFileAction.triggered.connect(self._cubeSealedFromTextFile)
         
@@ -62,57 +64,55 @@ class MainWindowMenuBar(QtGui.QMenuBar):
         cubeMenu.addActions([fromMWSDeckAction, fromCubeFileAction, fromTextFileAction])
         
         #------------------------
-        settingsMenu = QtGui.QMenu('&Settings', self)
+        settingsMenu = QtWidgets.QMenu('&Settings', self)
         
-        imageFolderAction = QtGui.QAction('&Set image folder', self)        
+        imageFolderAction = QtWidgets.QAction('&Set image folder', self)
         imageFolderAction.setStatusTip('Set the folder containing the card images')
         imageFolderAction.triggered.connect(self._imageFolder)
         
-        landImageAction = QtGui.QAction('&Set images for basic lands', self)        
+        landImageAction = QtWidgets.QAction('&Set images for basic lands', self)
         landImageAction.setStatusTip('Set the images for basic lands to use wit hMWS')
         landImageAction.triggered.connect(self._setBasicLandImages)
         
-        autoUpdateStatsWidgetAction = QtGui.QAction('&Automatically update the statistics panel', self)        
+        autoUpdateStatsWidgetAction = QtWidgets.QAction('&Automatically update the statistics panel', self)
         autoUpdateStatsWidgetAction.setStatusTip('Update the database')
         autoUpdateStatsWidgetAction.toggled.connect(self._autoUpdateStatsWidgetAction)
         autoUpdateStatsWidgetAction.setCheckable(True)
-        
-        if self._mainFrameParent.getSetting('autoUpdateStatsWidget'):
-            autoUpdateStatsWidgetAction.setChecked(True)
-        
-        settingsMenu.addActions([imageFolderAction, landImageAction, 
+        print(105)
+
+        settingsMenu.addActions([imageFolderAction, landImageAction,
                                  autoUpdateStatsWidgetAction])
-        
-        
+        print(105)
         #------------------------
-        databaseMenu = QtGui.QMenu('&Database', self)
+        databaseMenu = QtWidgets.QMenu('&Database', self)
         
-        updateAction = QtGui.QAction('&Update the database', self)        
+        updateAction = QtWidgets.QAction('&Update the database', self)
         updateAction.setStatusTip('Update the database')
         updateAction.triggered.connect(self._update)
         
-        editSetNamesAction = QtGui.QAction('&Edit set names and codes', self)        
+        editSetNamesAction = QtWidgets.QAction('&Edit set names and codes', self)
         editSetNamesAction.setStatusTip('Edit set names and codes')
         editSetNamesAction.triggered.connect(self._editSetNames)
         
-        setCodeFormatMenu = QtGui.QMenu('&Set predefined setcodes for all the sets', self)        
+        setCodeFormatMenu = QtWidgets.QMenu('&Set predefined setcodes for all the sets', self)
         setCodeFormatMenu.setStatusTip('Set predefined setcodes for all the sets')
         
-        mwsSetCodesAction = QtGui.QAction('&MWS setcodes', self)        
+        mwsSetCodesAction = QtWidgets.QAction('&MWS setcodes', self)
         mwsSetCodesAction.setStatusTip('MWS setcodes')
         mwsSetCodesAction.triggered.connect(self._setMwsSetcodes)
         
-        wizardsSetCodesAction = QtGui.QAction('&Wizards official setcodes', self)        
+        wizardsSetCodesAction = QtWidgets.QAction('&Wizards official setcodes', self)
         wizardsSetCodesAction.setStatusTip('Wizards official setcodes')
         wizardsSetCodesAction.triggered.connect(self._setWizardsSetcodes)
         
-        editSetNamesAction = QtGui.QAction('&Edit set names and codes', self)        
+        editSetNamesAction = QtWidgets.QAction('&Edit set names and codes', self)
         editSetNamesAction.setStatusTip('Edit set names and codes')
         editSetNamesAction.triggered.connect(self._editSetNames)
         
-        formatAction = QtGui.QAction('&Format the database', self)        
+        formatAction = QtWidgets.QAction('&Format the database', self)
         formatAction.setStatusTip('Format the database')
         formatAction.triggered.connect(self._format)
+        print(101)
         
         setCodeFormatMenu.addActions([mwsSetCodesAction, wizardsSetCodesAction])
         databaseMenu.addActions([editSetNamesAction, updateAction, formatAction])
@@ -143,8 +143,8 @@ class MainWindowMenuBar(QtGui.QMenuBar):
     def _imageFolder(self):
         """Sets the imagefolder"""
         
-        caption='Choose the folder that contains the card images'
-        path = QtGui.QFileDialog.getExistingDirectory(caption=caption)
+        caption = 'Choose the folder that contains the card images'
+        path = QtWidgets.QFileDialog.getExistingDirectory(caption=caption)
         
         if path:
             self._mainFrameParent.configure(picsFolder=str(path))
@@ -236,12 +236,12 @@ class MainWindowMenuBar(QtGui.QMenuBar):
         title = 'Format database'
         msg = 'Really format the database? This cannot be undone.'
         
-        reply = QtGui.QMessageBox.question(self, title, msg,
-                                           QtGui.QMessageBox.Yes,
-                                           QtGui.QMessageBox.No,
-                                           QtGui.QMessageBox.Cancel)
+        reply = QtWidgets.QMessageBox.question(self, title, msg,
+                                               QtWidgets.QMessageBox.Yes,
+                                               QtWidgets.QMessageBox.No,
+                                               QtWidgets.QMessageBox.Cancel)
         
-        if reply == QtGui.QMessageBox.Yes:
+        if reply == QtWidgets.QMessageBox.Yes:
             db = self._mainFrameParent.getDatabase()
             db.format()
             self._mainFrameParent.saveDatabase(db)
@@ -251,7 +251,6 @@ class MainWindowMenuBar(QtGui.QMenuBar):
         """
         Sets the Wizards official setcodes to all the mtgsets in the database.
         """
-        
         
 
 #-------------------------------------------------------------------------------
@@ -264,7 +263,7 @@ class MainWindowMenuBar(QtGui.QMenuBar):
         db = self._mainFrameParent.getDatabase()
         
         for (setName, setCode) in mwsSetCodes.iteritems():
-            if db.hasMtgSet(mtgSetName=unicode(setName.title())):
+            if db.hasMtgSet(mtgSetName=setName.title()):
                 db.editSetName(origMtgSetName=setName.title(), 
                                newMtgSetCode=setCode.upper())
         

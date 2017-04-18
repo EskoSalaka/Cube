@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: latin-1 -*-
 
 
 ################################################################################
@@ -52,8 +50,8 @@ class FileHandler:
         
         """
         
-        lands = {'Forest' : 0, 'Island' : 0, 'Plains' : 0, 
-                 'Swamp' : 0, 'Mountain' : 0}
+        lands = {'Forest': 0, 'Island': 0, 'Plains': 0,
+                 'Swamp': 0, 'Mountain': 0}
         
         sideBoard = []
         deck = []
@@ -83,10 +81,8 @@ class FileHandler:
                 if self._db.hasMtgSet(mtgSetCode=setCode):
                     setInstance = self._db.getMtgSet(mtgSetCode=setCode)
                     cardInstance = setInstance.getCard(cardName=cardName)
-                    print setInstance.name, cardInstance.name
-                    
+
                     if not cardInstance:
-                        print 1
                         cardInstance = self._db.getCards(cardName)[-1]
                 
                 else:
@@ -98,8 +94,7 @@ class FileHandler:
                 else:
                     for _ in range(num):
                         deck.append(cardInstance)
-                
-                    
+
         return deck, sideBoard, lands, rejected
     
 #-------------------------------------------------------------------------------
@@ -117,19 +112,19 @@ class FileHandler:
             altArt = card.altArt
             
             if card.isDual:
-                cardName = unicode(card.name) + '/' + card.dualCardName
+                cardName = card.name + '/' + card.dualCardName
             else:
-                cardName = unicode(card.name)
+                cardName = card.name
                 
             if altArt:
                 line = u'{qty} [{setCode}] {cardName} ({altArt})\n'.format(qty=qty, 
-                                                               setCode=setCode, 
-                                                               cardName=cardName,
-                                                               altArt=altArt)
+                                                                           setCode=setCode,
+                                                                           cardName=cardName,
+                                                                           altArt=altArt)
             else:
                 line = u'{qty} [{setCode}] {cardName}\n'.format(qty=qty, 
-                                                           setCode=setCode, 
-                                                           cardName=cardName)
+                                                                setCode=setCode,
+                                                                cardName=cardName)
             deckFile.write(line.encode('latin-1'))
             
        
@@ -141,19 +136,19 @@ class FileHandler:
             altArt = card.altArt
             
             if card.isDual:
-                cardName = unicode(card.name) + '/' + card.dualCardName
+                cardName = card.name + '/' + card.dualCardName
             else:
-                cardName = unicode(card.name)
+                cardName = card.name
                 
             if altArt:
                 line = u'SB: {qty} [{setCode}] {cardName} ({altArt})\n'.format(qty=qty, 
-                                                                   setCode=setCode, 
-                                                                   cardName=cardName,
-                                                                   altArt=altArt)
+                                                                               setCode=setCode,
+                                                                               cardName=cardName,
+                                                                               altArt=altArt)
             else:
                 line = u'SB: {qty} [{setCode}] {cardName}\n'.format(qty=qty, 
-                                                               setCode=setCode, 
-                                                               cardName=cardName)
+                                                                    setCode=setCode,
+                                                                    cardName=cardName)
             deckFile.write(line.encode('latin-1'))
                 
 #-------------------------------------------------------------------------------
@@ -245,7 +240,7 @@ class FileHandler:
         #Black non-creatures
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['B']['Non-Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -265,7 +260,7 @@ class FileHandler:
         textFile.write(spoilerFrontHook.encode('latin-1'))
         textFile.write('---Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['R']['Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -280,7 +275,7 @@ class FileHandler:
         #Red non-creatures
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['R']['Non-Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -300,7 +295,7 @@ class FileHandler:
         textFile.write(spoilerFrontHook.encode('latin-1'))
         textFile.write('---Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['G']['Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -315,7 +310,7 @@ class FileHandler:
         #Green non-creatures
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['G']['Non-Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -333,7 +328,7 @@ class FileHandler:
         textFile.write(spoilerFrontHook.encode('latin-1'))
         textFile.write('---Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['U']['Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -350,7 +345,7 @@ class FileHandler:
         #Blue non-creatures
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['U']['Non-Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -368,7 +363,7 @@ class FileHandler:
         textFile.write(spoilerFrontHook.encode('latin-1'))
         textFile.write('---Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['W']['Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -385,7 +380,7 @@ class FileHandler:
         #White non-creatures
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['W']['Non-Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -403,7 +398,7 @@ class FileHandler:
         textFile.write(spoilerFrontHook.encode('latin-1'))
         textFile.write('---Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['C']['Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -418,7 +413,7 @@ class FileHandler:
         #Colorless non-creatures
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
         
-        for CC in range(0,7):
+        for CC in range(0, 7):
             num = len(sortedCards['C']['Non-Creature'][CC])
             line = '------{CC}CC({num})\n'.format(CC=CC, num=num)
             textFile.write(line.encode('latin-1'))
@@ -442,7 +437,7 @@ class FileHandler:
             textFile.write('{combo}\n'.format(combo=combo).encode('latin-1'))
             
             textFile.write('---Creatures\n'.encode('latin-1'))
-            for CC in range(0,7): 
+            for CC in range(0, 7):
                 for card in sortedCards['M']['Creature'][CC]:
                     if combo == card.color or combo[::-1] == card.color:
                         line = '   1 ' + frontHook + card.name  + backHook + '\n'
@@ -450,7 +445,7 @@ class FileHandler:
             
             textFile.write('\n'.encode('latin-1'))
             textFile.write('---Non-Creatures\n'.encode('latin-1'))
-            for CC in range(0,7): 
+            for CC in range(0, 7):
                 for card in sortedCards['M']['Non-Creature'][CC]:
                     if combo == card.color or combo[::-1] == card.color:
                         line = '   1 ' + frontHook + card.name  + backHook + '\n'
@@ -461,7 +456,7 @@ class FileHandler:
         textFile.write('\n'.encode('latin-1'))
         
         textFile.write('---Creatures\n'.encode('latin-1'))
-        for CC in range(0,7): 
+        for CC in range(0, 7):
             for card in sortedCards['M']['Creature'][CC]:
                 if len(card.color) > 2:
                     line = '   1 ' + frontHook + card.name  + backHook + '\n'
@@ -469,7 +464,7 @@ class FileHandler:
                     
         textFile.write('\n'.encode('latin-1'))
         textFile.write('---Non-Creatures\n'.encode('latin-1'))
-        for CC in range(0,7): 
+        for CC in range(0, 7):
             for card in sortedCards['M']['Non-Creature'][CC]:
                 if len(card.color) > 2:
                     line = '   1 ' + frontHook + card.name  + backHook + '\n'
