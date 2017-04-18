@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//Base/FileHandler.py=latin1
+encoding//CubeEditor/CubeEditor.py=latin1
+encoding//GUI/BasicLandDialog.py=utf-8
+encoding//GUI/CardList.py=latin1
+encoding//GUI/CubeList.py=latin1
+encoding//GUI/HookDialog.py=utf-8
+encoding//GUI/SetNameEditorDialog.py=utf-8
+encoding//GUI/SetsTreeWidget.py=latin1
+encoding//GUI/StandardGenerationDialog.py=utf-8
+encoding//GUI/UpdateDialog.py=utf-8
+encoding/Main.py=utf-8
+encoding/MainWindow.py=latin1
