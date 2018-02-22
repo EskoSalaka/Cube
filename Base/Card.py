@@ -214,7 +214,7 @@ class Card:
                                      x == 'B' or
                                      x == 'R' or
                                      x == 'G', cost)
-        print(numbers)
+        
         if numbers:
             totalCost += int(numbers)
         

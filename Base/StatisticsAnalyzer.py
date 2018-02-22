@@ -4,7 +4,7 @@ import random
 import numpy
 
 from numpy.random import hypergeometric
-from collections import  defaultdict
+from collections import defaultdict
 
 ################################################################################
 class StatisticsAnalyzer:
@@ -22,15 +22,15 @@ class StatisticsAnalyzer:
         #The types, colours and the rest are held in various dicts. From these 
         #it's simple to calculate whatever stats you want. The dicts are mostly
         #self-explanatory.
-        self._colors = {'B':0, 'R':0, 'G':0, 'U':0, 'W':0, 'C':0, 'M':0}
-        self._castingCosts = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
-        self._creatureManaCosts = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
-        self._nonCreatureManaCosts = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
-        self._manaSymbols = {'B':0, 'R':0, 'G':0, 'U':0, 'W':0, 'C':0}
-        self._types =  {'Artifact':0, 'Creature':0, 'Enchantment':0, 
-                        'Instant':0, 'Land':0, 'Planeswalker':0, 'Sorcery':0}
+        self._colors = {'B': 0, 'R': 0, 'G': 0, 'U': 0, 'W': 0, 'C': 0, 'M': 0}
+        self._castingCosts = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+        self._creatureManaCosts = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+        self._nonCreatureManaCosts = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+        self._manaSymbols = {'B': 0, 'R': 0, 'G': 0, 'U': 0, 'W': 0, 'C': 0}
+        self._types = {'Artifact': 0, 'Creature': 0, 'Enchantment': 0,
+                    'Instant': 0, 'Land': 0, 'Planeswalker': 0, 'Sorcery': 0}
         
-        self._simpleTypes = {'Creature':0, 'Non-Creature':0, 'Land':0}
+        self._simpleTypes = {'Creature': 0, 'Non-Creature': 0, 'Land': 0}
         
         
         #------------------------------------
